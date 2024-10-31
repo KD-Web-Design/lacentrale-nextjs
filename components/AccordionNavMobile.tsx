@@ -16,12 +16,12 @@ import Link from "next/link";
 
 export function AccordionNavMobile() {
   return (
-    <Accordion type="single" collapsible className="w-full">
+    <Accordion type="multiple" className="w-full">
       {navigation.map((item, index) => (
         <AccordionItem key={index} value={`item-${index}`} className="">
           <AccordionTrigger
             className={`font-semibold text-md ${
-              item.name === "Acheter" ? "text-red-500" : "hover:text-gray-600"
+              item.name === "Acheter" ? "text-accent" : "hover:text-gray-600"
             }`}
           >
             {item.name}
@@ -39,7 +39,7 @@ export function AccordionNavMobile() {
                       <div
                         className={`flex items-center ${
                           category.name === "Voitures occasions"
-                            ? "text-red-500"
+                            ? "text-accent"
                             : "hover:text-gray-600"
                         }`}
                       >
@@ -58,7 +58,7 @@ export function AccordionNavMobile() {
                   alt="acheter-image"
                   width={700}
                   height={700}
-                  className="my-2 w-full"
+                  className="my-2 w-full "
                 />
               </div>
             )}
@@ -74,7 +74,7 @@ export function AccordionNavMobile() {
                       <div
                         className={`flex items-center ${
                           category.name === "Voitures occasions"
-                            ? "text-red-500"
+                            ? "text-accent"
                             : "hover:text-gray-600"
                         }`}
                       >
@@ -109,7 +109,7 @@ export function AccordionNavMobile() {
                       <div
                         className={`flex items-center ${
                           category.name === "Voitures occasions"
-                            ? "text-red-500"
+                            ? "text-accent"
                             : "hover:text-gray-600"
                         }`}
                       >
@@ -144,7 +144,7 @@ export function AccordionNavMobile() {
                       <div
                         className={`flex items-center ${
                           category.name === "Voitures occasions"
-                            ? "text-red-500"
+                            ? "text-accent"
                             : "hover:text-gray-600"
                         }`}
                       >

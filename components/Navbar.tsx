@@ -32,27 +32,27 @@ export default function Navbar() {
                 <li
                   key={item.name}
                   className={`relative group inline-block mx-4 py-2 ${
-                    item.current ? "text-red-500" : "hover:text-red-500"
+                    item.current ? "text-accent" : "hover:text-accent"
                   }`}
                 >
                   <a href={item.href} className="font-semibold">
                     {item.name}
                   </a>
                   <div
-                    className={`h-[2px] bg-red-500 ${
+                    className={`h-[2px] bg-accent ${
                       item.current ? "w-full" : "w-0 group-hover:w-full"
                     } absolute bottom-0 left-0`}
                   />
                 </li>
               ))}
-              <div className="w-[2px] h-6 bg-red-500 mx-4 my-auto"></div>
+              <div className="w-[2px] h-6 bg-accent mx-4 my-auto"></div>
             </ul>
             <ul className="gap-4 lg:gap-6 inline-flex items-center h-full">
               {[SearchIcon, HeartIcon, CircleUserIcon].map((Icon, index) => (
                 <li key={index}>
                   <Icon
                     size={18}
-                    className="cursor-pointer hover:text-red-500"
+                    className="cursor-pointer hover:text-accent"
                   />
                 </li>
               ))}
