@@ -1,13 +1,7 @@
-import { navigation } from "@/data/navigationData";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@radix-ui/react-accordion";
 import { XIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import { AccordionNavMobile } from "./AccordionNavMobile";
 
 interface NavbarMobileOverlayProps {
   onClose: () => void;
@@ -34,18 +28,7 @@ export default function NavbarMobileOverlay({
         />
       </div>
       <div className="p-4">
-        <Accordion type="single" collapsible className="w-full divide-y-2">
-          {navigation.map((item, index) => (
-            <AccordionItem key={index} value={`item-${index}`} className="py-3">
-              <AccordionTrigger className="font-semibold hover:text-red-500">
-                {item.name}
-              </AccordionTrigger>
-              <AccordionContent>
-                <p>empty</p>
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        <AccordionNavMobile />
       </div>
     </div>
   );
