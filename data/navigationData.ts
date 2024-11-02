@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 interface NavigationItem {
+  id?: number;
   name: string;
   description?: string;
   href: string;
@@ -21,10 +22,10 @@ interface NavigationItem {
 }
 
 export const navigation: NavigationItem[] = [
-  { name: "Acheter", href: "#", current: true },
-  { name: "Vendre", href: "#" },
-  { name: "La Cote", href: "#" },
-  { name: "Vous conseiller", href: "#" },
+  { id: 1, name: "Acheter", href: "#", current: true },
+  { id: 2, name: "Vendre", href: "#" },
+  { id: 3, name: "La Cote", href: "#" },
+  { id: 4, name: "Vous conseiller", href: "#" },
 ];
 
 export const acheterCategories: NavigationItem[] = [

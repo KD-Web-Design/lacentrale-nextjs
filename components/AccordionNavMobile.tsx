@@ -21,13 +21,13 @@ export function AccordionNavMobile() {
         <AccordionItem key={index} value={`item-${index}`} className="">
           <AccordionTrigger
             className={`font-semibold text-md ${
-              item.name === "Acheter" ? "text-accent" : "hover:text-gray-600"
+              item.current === true ? "text-accent" : "hover:text-gray-600"
             }`}
           >
             {item.name}
           </AccordionTrigger>
           <AccordionContent className="">
-            {item.name === "Acheter" && (
+            {item.id === 1 && (
               <div className="flex flex-col gap-1">
                 {acheterCategories.map((category, catIndex) => (
                   <Link
@@ -62,7 +62,7 @@ export function AccordionNavMobile() {
                 />
               </div>
             )}
-            {item.name === "Vendre" && (
+            {item.id === 2 && (
               <div className="flex flex-col gap-1">
                 {vendreCategories.map((category, catIndex) => (
                   <Link
@@ -97,7 +97,7 @@ export function AccordionNavMobile() {
                 />
               </div>
             )}
-            {item.name === "La Cote" && (
+            {item.id === 3 && (
               <div className="flex flex-col gap-1">
                 {laCoteCategories.map((category, catIndex) => (
                   <Link
@@ -132,7 +132,7 @@ export function AccordionNavMobile() {
                 />
               </div>
             )}
-            {item.name === "Vous conseiller" && (
+            {item.id === 4 && (
               <div className="flex flex-col gap-1">
                 {vousConseillerCategories.map((category, catIndex) => (
                   <Link
