@@ -12,21 +12,17 @@ import {
   Wind,
 } from "lucide-react";
 
-interface NavigationItem {
+export interface NavigationItem {
   id?: number;
   name: string;
   description?: string;
   href: string;
   current?: boolean;
   Icon?: LucideIcon;
+  categories?: NavigationItem[];
+  image?: string;
 }
 
-export const navigation: NavigationItem[] = [
-  { id: 1, name: "Acheter", href: "#", current: true },
-  { id: 2, name: "Vendre", href: "#" },
-  { id: 3, name: "La Cote", href: "#" },
-  { id: 4, name: "Vous conseiller", href: "#" },
-];
 
 export const acheterCategories: NavigationItem[] = [
   {
@@ -35,24 +31,28 @@ export const acheterCategories: NavigationItem[] = [
     href: "#",
     current: true,
     Icon: Car,
+    image: "/images/acheter-desktop.png",
   },
   {
     name: "Voitures neuves",
     description: "Notre meilleure sélection de véhicules",
     href: "#",
     Icon: Sparkles,
+    image: "/images/vendre-desktop.png",
   },
   {
     name: "Utilitaires occasions",
     description: "Trouvez l'utilitaire qui vous correspond",
     href: "#",
     Icon: Truck,
+    image: "/images/la-cote-desktop.png",
   },
   {
     name: "Motos occasions",
     description: "Un large choix de motos, scooters, quads",
     href: "#",
     Icon: Wind,
+    image: "/images/vous-conseiller-desktop.png",
   },
 ];
 
@@ -121,4 +121,11 @@ export const vousConseillerCategories: NavigationItem[] = [
     href: "#",
     Icon: CircleHelp,
   },
+];
+
+export const navigation: NavigationItem[] = [
+  { id: 1, name: "Acheter", href: "#", current: true, categories: acheterCategories },
+  { id: 2, name: "Vendre", href: "#", categories: vendreCategories },
+  { id: 3, name: "La Cote", href: "#", categories: laCoteCategories },
+  { id: 4, name: "Vous conseiller", href: "#", categories: vousConseillerCategories },
 ];

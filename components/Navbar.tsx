@@ -5,6 +5,7 @@ import Image from "next/image";
 import { CircleUserIcon, HeartIcon, MenuIcon, SearchIcon } from "lucide-react";
 import { navigation } from "@/data/navigationData";
 import NavbarMobileOverlay from "./NavbarMobileOverlay";
+import { NavbarHoverCard } from "./NavbarHoverCard";
 
 export default function Navbar() {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
@@ -35,9 +36,11 @@ export default function Navbar() {
                     item.current ? "text-accent" : "hover:text-accent"
                   }`}
                 >
-                  <a href={item.href} className="font-semibold">
-                    {item.name}
-                  </a>
+                  <NavbarHoverCard categories={item.categories}>
+                    <a href={item.href} className="font-semibold">
+                      {item.name}
+                    </a>
+                  </NavbarHoverCard>
                   <div
                     className={`h-[2px] bg-accent ${
                       item.current ? "w-full" : "w-0 group-hover:w-full"
