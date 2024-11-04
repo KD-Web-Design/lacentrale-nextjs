@@ -30,23 +30,26 @@ export default function Navbar() {
           <div className="lg:flex lg:gap-4">
             <ul className="hidden lg:inline-flex items-center gap-2 h-full">
               {navigation.map((item) => (
-                <li
+                <NavbarHoverCard
                   key={item.name}
-                  className={`relative group inline-block mx-4 py-2 ${
-                    item.current ? "text-accent" : "hover:text-accent"
-                  }`}
+                  categories={item.categories}
+                  tableImage={item.tableImage}
                 >
-                  <NavbarHoverCard categories={item.categories}>
+                  <li
+                    className={`relative group inline-block mx-4 py-2 ${
+                      item.current ? "text-accent" : "hover:text-accent"
+                    }`}
+                  >
                     <a href={item.href} className="font-semibold">
                       {item.name}
                     </a>
-                  </NavbarHoverCard>
-                  <div
-                    className={`h-[2px] bg-accent ${
-                      item.current ? "w-full" : "w-0 group-hover:w-full"
-                    } absolute bottom-0 left-0`}
-                  />
-                </li>
+                    <div
+                      className={`h-[2px] bg-accent ${
+                        item.current ? "w-full" : "w-0 group-hover:w-full"
+                      } absolute bottom-0 left-0`}
+                    />
+                  </li>
+                </NavbarHoverCard>
               ))}
               <div className="w-[2px] h-6 bg-accent mx-4 my-auto"></div>
             </ul>

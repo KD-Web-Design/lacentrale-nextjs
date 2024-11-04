@@ -26,7 +26,7 @@ export function AccordionNavMobile() {
           >
             {item.name}
           </AccordionTrigger>
-          <AccordionContent className="">
+          <AccordionContent>
             {item.id === 1 && (
               <div className="flex flex-col gap-1">
                 {acheterCategories.map((category, catIndex) => (

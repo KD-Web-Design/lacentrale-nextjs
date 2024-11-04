@@ -3,24 +3,29 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { navigation, NavigationItem } from "@/data/navigationData";
+import { NavigationItem } from "@/data/navigationData";
 import Image from "next/image";
 import Link from "next/link";
 
 interface NavbarHoverCardProps {
   children: React.ReactNode;
   categories?: NavigationItem[];
+  tableImage?: string;
 }
 
 export function NavbarHoverCard({
   children,
   categories,
+  tableImage,
 }: NavbarHoverCardProps) {
   return (
-    <HoverCard openDelay={0} closeDelay={0}>
+    <HoverCard openDelay={0} closeDelay={50}>
       <HoverCardTrigger asChild>{children}</HoverCardTrigger>
-      <HoverCardContent className="flex w-[550px] divide-x-2 p-3">
-        <div className="w-7/12">
+      <HoverCardContent
+        sideOffset={10}
+        className="flex w-[550px] divide-x-2 p-3"
+      >
+        <div className="w-1/2">
           {categories?.map((category, catIndex) => (
             <Link
               key={catIndex}
@@ -45,17 +50,16 @@ export function NavbarHoverCard({
             </Link>
           ))}
         </div>
-        <div className="w-5/12 flex items-center justify-center p-4">
-          {navigation.map((item) => (
+        <div className="w-1/2 flex flex-col items-center justify-start p-4">
+          {tableImage && (
             <Image
-              key={item.name}
-              src={item.image}
-              alt="acheter-image"
+              src={tableImage}
+              alt="table-image"
               width={700}
               height={700}
-              className="w-full"
+              className="w-full mb-auto"
             />
-          ))}
+          )}
         </div>
       </HoverCardContent>
     </HoverCard>
