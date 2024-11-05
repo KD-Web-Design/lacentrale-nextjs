@@ -1,7 +1,7 @@
 import { XIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { AccordionNavMobile } from "./AccordionNavMobile";
+import { AccordionNavMobile } from "./MobileNavAccordion";
 
 interface NavbarMobileOverlayProps {
   onClose: () => void;

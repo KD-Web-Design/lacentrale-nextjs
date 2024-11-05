@@ -36,13 +36,6 @@ export default function SideFiltersButton() {
                 <span className="text-gray-400 text-xs">(127 875)</span>
               </Label>
             </div>
-            <div className="flex items-center space-x-2 hover:bg-gray-100 px-4 py-1 rounded-sm">
-              <Checkbox id="terms2" />
-              <Label htmlFor="terms2" className="cursor-pointer">
-                Citadine{" "}
-                <span className="text-gray-400 text-xs">(127 875)</span>
-              </Label>
-            </div>
           </div>
         </div>
       </PopoverContent>

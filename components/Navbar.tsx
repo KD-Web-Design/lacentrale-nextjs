@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { CircleUserIcon, HeartIcon, MenuIcon, SearchIcon } from "lucide-react";
 import { navigation } from "@/data/navigationData";
-import NavbarMobileOverlay from "./NavbarMobileOverlay";
+import NavbarMobileOverlay from "./MobileNavbarHoverlay";
 import { NavbarHoverCard } from "./NavbarHoverCard";
 
 export default function Navbar() {
