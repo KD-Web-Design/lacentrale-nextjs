@@ -126,3 +126,9 @@ export const navigation: NavigationItem[] = [
   { id: 3, name: "La Cote", href: "#", categories: laCoteCategories, tableImage: "/images/lacote-desktop.png" },
   { id: 4, name: "Vous conseiller", href: "#", categories: vousConseillerCategories, tableImage: "/images/vous-conseiller-desktop.png" },
 ];
+
+export const SideFiltersButtonPopoverName = [
+  { id: 1, name: "Type de véhicule" },
+  { id: 2, name: "Marque" },
+  { id: 3, name: "Modèle" },
+];
