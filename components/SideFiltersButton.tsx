@@ -21,11 +21,11 @@ export default function SideFiltersButton() {
   const [categories, setCategories] = useState<BaseEntity[]>([]);
   const [marques, setMarques] = useState<BaseEntity[]>([]);
   const [modeles, setModeles] = useState<BaseEntity[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const [activePopover, setActivePopover] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchData = async <T,>(
+    const fetchData = async <T extends BaseEntity>(
       url: string,
       setState: React.Dispatch<React.SetStateAction<T[]>>
     ) => {
