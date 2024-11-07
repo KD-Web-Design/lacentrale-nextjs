@@ -1,6 +1,6 @@
 import { XIcon } from "lucide-react";
 import React from "react";
-import SideFiltersButton from "./SideFiltersButton";
+import MobileSideFiltersButton from "./MobileSideFiltersButton";
 
 export default function MobileFilters({ onClose }: { onClose: () => void }) {
   return (
@@ -15,7 +15,7 @@ export default function MobileFilters({ onClose }: { onClose: () => void }) {
         />
       </div>
       <main className="flex flex-col w-full p-4">
-        <SideFiltersButton />
+        <MobileSideFiltersButton />
       </main>
     </div>
   );

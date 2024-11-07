@@ -18,6 +18,7 @@ interface BaseEntity {
 }
 
 export default function SideFiltersButton() {
+  // Gestion d'états
   const [categories, setCategories] = useState<BaseEntity[]>([]);
   const [marques, setMarques] = useState<BaseEntity[]>([]);
   const [modeles, setModeles] = useState<BaseEntity[]>([]);
@@ -39,6 +40,7 @@ export default function SideFiltersButton() {
     fetchData<BaseEntity>("/api/modeles", setModeles);
   }, []);
 
+  // Fonctions utilitaires pour gérer la recherche dans l'Input
   const filteredCategories = categories.filter((category) =>
     category.nom.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -51,6 +53,7 @@ export default function SideFiltersButton() {
     modele.nom.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Fonction pour gérer les Popovers
   const handlePopoverChange = (isOpen: boolean, popoverName: string) => {
     if (isOpen) {
       setActivePopover(popoverName);
@@ -58,6 +61,24 @@ export default function SideFiltersButton() {
       setSearchTerm("");
       setActivePopover(null);
     }
+  };
+
+  // Fonction générique pour afficher les items des Popovers
+  const renderPopoverItems = (items: BaseEntity[], type: string) => {
+    return items.map((item: BaseEntity) => (
+      <div
+        key={item.id}
+        className="flex items-center space-x-2 hover:bg-gray-100 px-4 py-1 rounded-sm"
+      >
+        <Checkbox id={`${type}-${item.id}`} />
+        <Label htmlFor={`${type}-${item.id}`} className="cursor-pointer">
+          {item.nom}{" "}
+          <span className="text-gray-400 text-xs ml-1">
+            ({item.nombre_de_vehicules})
+          </span>
+        </Label>
+      </div>
+    ));
   };
 
   return (
@@ -94,59 +115,11 @@ export default function SideFiltersButton() {
             <ScrollArea className="">
               <div className="focus:bg-gray-100 grid grid-cols-2 gap-2">
                 {activePopover === "Type de véhicule" &&
-                  filteredCategories.map((category) => (
-                    <div
-                      key={category.id}
-                      className="flex items-center space-x-2 hover:bg-gray-100 px-4 py-1 rounded-sm"
-                    >
-                      <Checkbox id={`category-${category.id}`} />
-                      <Label
-                        htmlFor={`category-${category.id}`}
-                        className="cursor-pointer"
-                      >
-                        {category.nom}{" "}
-                        <span className="text-gray-400 text-xs ml-1">
-                          ({category.nombre_de_vehicules})
-                        </span>
-                      </Label>
-                    </div>
-                  ))}
+                  renderPopoverItems(filteredCategories, "category")}
                 {activePopover === "Marque" &&
-                  filteredMarques.map((marque) => (
-                    <div
-                      key={marque.id}
-                      className="flex items-center space-x-2 hover:bg-gray-100 px-4 py-1 rounded-sm"
-                    >
-                      <Checkbox id={`marque-${marque.id}`} />
-                      <Label
-                        htmlFor={`marque-${marque.id}`}
-                        className="cursor-pointer"
-                      >
-                        {marque.nom}{" "}
-                        <span className="text-gray-400 text-xs ml-1">
-                          ({marque.nombre_de_vehicules})
-                        </span>
-                      </Label>
-                    </div>
-                  ))}
+                  renderPopoverItems(filteredMarques, "marque")}
                 {activePopover === "Modèle" &&
-                  filteredModeles.map((modele) => (
-                    <div
-                      key={modele.id}
-                      className="flex items-center space-x-2 hover:bg-gray-100 px-4 py-1 rounded-sm"
-                    >
-                      <Checkbox id={`modele-${modele.id}`} />
-                      <Label
-                        htmlFor={`modele-${modele.id}`}
-                        className="cursor-pointer"
-                      >
-                        {modele.nom}{" "}
-                        <span className="text-gray-400 text-xs ml-1">
-                          ({modele.nombre_de_vehicules})
-                        </span>
-                      </Label>
-                    </div>
-                  ))}
+                  renderPopoverItems(filteredModeles, "modele")}
               </div>
             </ScrollArea>
           </PopoverContent>
