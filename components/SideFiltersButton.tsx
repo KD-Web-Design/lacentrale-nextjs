@@ -9,60 +9,34 @@ import { useEffect, useState } from "react";
 import { SideFiltersButtonPopoverName } from "@/data/navigationData";
 import { ScrollArea } from "./ui/scroll-area";
 
-interface Category {
+// Interfaces
+interface BaseEntity {
   id: number;
   nom: string;
-  nombre_de_vehicules: number;
-}
-
-interface Marque {
-  id: number;
-  nom: string;
-  nombre_de_vehicules: number;
-}
-
-interface Modele {
-  id: number;
-  nom: string;
-  marque_id: number;
+  marque_id?: number;
   nombre_de_vehicules: number;
 }
 
 export default function SideFiltersButton() {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [marques, setMarques] = useState<Marque[]>([]);
-  const [modeles, setModeles] = useState<Modele[]>([]);
+  const [categories, setCategories] = useState<BaseEntity[]>([]);
+  const [marques, setMarques] = useState<BaseEntity[]>([]);
+  const [modeles, setModeles] = useState<BaseEntity[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [activePopover, setActivePopover] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      const response = await fetch("/api/categories");
+    const fetchData = async <T,>(
+      url: string,
+      setState: React.Dispatch<React.SetStateAction<T[]>>
+    ) => {
+      const response = await fetch(url);
       const data = await response.json();
-      setCategories(data);
+      setState(data);
     };
 
-    fetchCategories();
-  }, []);
-
-  useEffect(() => {
-    const fetchMarques = async () => {
-      const response = await fetch("/api/marques");
-      const data = await response.json();
-      setMarques(data);
-    };
-
-    fetchMarques();
-  }, []);
-
-  useEffect(() => {
-    const fetchModeles = async () => {
-      const response = await fetch("/api/modeles");
-      const data = await response.json();
-      setMarques(data);
-    };
-
-    fetchModeles();
+    fetchData<BaseEntity>("/api/categories", setCategories);
+    fetchData<BaseEntity>("/api/marques", setMarques);
+    fetchData<BaseEntity>("/api/modeles", setModeles);
   }, []);
 
   const filteredCategories = categories.filter((category) =>
@@ -74,7 +48,7 @@ export default function SideFiltersButton() {
   );
 
   const filteredModeles = modeles.filter((modele) =>
-    marque.nom.toLowerCase().includes(searchTerm.toLowerCase())
+    modele.nom.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handlePopoverChange = (isOpen: boolean, popoverName: string) => {
@@ -151,6 +125,24 @@ export default function SideFiltersButton() {
                         {marque.nom}{" "}
                         <span className="text-gray-400 text-xs ml-1">
                           ({marque.nombre_de_vehicules})
+                        </span>
+                      </Label>
+                    </div>
+                  ))}
+                {activePopover === "Modèle" &&
+                  filteredModeles.map((modele) => (
+                    <div
+                      key={modele.id}
+                      className="flex items-center space-x-2 hover:bg-gray-100 px-4 py-1 rounded-sm"
+                    >
+                      <Checkbox id={`modele-${modele.id}`} />
+                      <Label
+                        htmlFor={`modele-${modele.id}`}
+                        className="cursor-pointer"
+                      >
+                        {modele.nom}{" "}
+                        <span className="text-gray-400 text-xs ml-1">
+                          ({modele.nombre_de_vehicules})
                         </span>
                       </Label>
                     </div>
