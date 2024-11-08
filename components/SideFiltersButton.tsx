@@ -41,17 +41,14 @@ export default function SideFiltersButton() {
   }, []);
 
   // Fonctions utilitaires pour gérer la recherche dans l'Input
-  const filteredCategories = categories.filter((category) =>
-    category.nom.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filterItems = (items: BaseEntity[]) =>
+    items.filter((item) =>
+      item.nom.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
-  const filteredMarques = marques.filter((marque) =>
-    marque.nom.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const filteredModeles = modeles.filter((modele) =>
-    modele.nom.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredCategories = filterItems(categories);
+  const filteredMarques = filterItems(marques);
+  const filteredModeles = filterItems(modeles);
 
   // Fonction pour gérer les Popovers
   const handlePopoverChange = (isOpen: boolean, popoverName: string) => {
@@ -103,7 +100,7 @@ export default function SideFiltersButton() {
               <Input
                 type="text"
                 className="pl-6"
-                placeholder={`Rechercher ${item.name.toLowerCase()}`}
+                placeholder={item.name}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
