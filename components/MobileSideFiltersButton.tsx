@@ -82,7 +82,7 @@ export default function MobileSideFiltersButton() {
         <section key={item.id}>
           <div
             id="trigger"
-            className="flex justify-between items-center text-black font-semibold text-lg bg-slate-100 rounded-lg py-1 px-4 border hover:border-black cursor-pointer"
+            className="flex justify-between items-center text-black font-semibold text-lg bg-gray-100 rounded-lg py-1 px-4 border hover:border-black cursor-pointer"
             onClick={() => handlePopoverChange(true, item.name)}
           >
             <span className="font-semibold text-md">{item.name}</span>
@@ -91,7 +91,7 @@ export default function MobileSideFiltersButton() {
           {isOverlayVisible && activePopover === item.name && (
             <div
               id="overlay"
-              className="inset-0 fixed bg-white lg:hidden px-1 flex flex-col"
+              className="inset-0 fixed bg-white z-50 lg:hidden px-1 flex flex-col"
             >
               <header className="p-4 relative">
                 <h1 className="text-center font-semibold text-lg">

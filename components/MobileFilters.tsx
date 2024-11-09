@@ -2,6 +2,7 @@ import { XIcon } from "lucide-react";
 import React from "react";
 import MobileSideFiltersButton from "./MobileSideFiltersButton";
 import MobileInputFilters from "./MobileInputFilters";
+import MobileCardFilters from "./MobileCardFilters";
 
 export default function MobileFilters({ onClose }: { onClose: () => void }) {
   return (
@@ -18,6 +19,7 @@ export default function MobileFilters({ onClose }: { onClose: () => void }) {
       <main className="flex flex-col w-full gap-4 p-4">
         <MobileSideFiltersButton />
         <MobileInputFilters />
+        <MobileCardFilters />
       </main>
     </div>
   );
