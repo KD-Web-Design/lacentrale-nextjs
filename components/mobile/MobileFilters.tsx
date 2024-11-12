@@ -49,7 +49,7 @@ export default function MobileFilters({ onClose }: { onClose: () => void }) {
         <MobileDoorsFilter />
         <MobileDimensionsFilter />
       </main>
-      <footer className="w-full flex justify-center fixed bottom-0 bg-white py-3 shadow-lg">
+      <footer className="w-full flex justify-center fixed bottom-0 bg-white py-3 shadow-lg z-20">
         <Button
           className="bg-accent text-lg font-bold px-20"
           size="lg"

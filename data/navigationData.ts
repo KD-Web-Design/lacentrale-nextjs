@@ -148,3 +148,13 @@ export const sellerType = [
   { id: 1, type: "Particulier" },
   { id: 2, type: "Professionnel" },
 ];
+
+export const sortOptions = [
+  { id: 1, option: "Le choix La Centrale" },
+  { id: 2, option: "Prix croissant" },
+  { id: 3, option: "Prix décroissant" },
+  { id: 4, option: "Kilométrage croissant" },
+  { id: 5, option: "Annonce les moins récentes" },
+  { id: 6, option: "Annonce les plus récentes" },
+  { id: 7, option: "Véhicules les plus récents" },
+];

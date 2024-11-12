@@ -7,7 +7,7 @@ import { Input } from "../ui/input";
 import { ScrollArea } from "../ui/scroll-area";
 import MobileValidateBtn from "./MobileValidateBtn";
 
-interface BaseEntity {
+export interface BaseEntity {
   id: number;
   nom: string;
   marque_id?: number;

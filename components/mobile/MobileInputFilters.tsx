@@ -23,8 +23,8 @@ export default function MobileInputFilters() {
             <span className="font-semibold">{category.nom}</span>
           </header>
           <div className="w-full h-2/3 flex items-center justify-between gap-3 px-4 border">
-            <Input placeholder="min" type="number" />
-            <Input placeholder="max" type="number" />
+            <Input placeholder="min" type="text" className="font-normal" />
+            <Input placeholder="max" type="text" />
           </div>
         </div>
       ))}
