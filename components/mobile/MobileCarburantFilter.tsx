@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function MobileCardFilters() {
+export default function MobileCarburantFilter() {
   const [carburants, setCarburants] = useState<string[]>([]);
 
   useEffect(() => {

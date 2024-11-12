@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { SideFiltersButtonPopoverName } from "@/data/navigationData";
 import { ChevronRight, Search, XIcon } from "lucide-react";
-import { Checkbox } from "./ui/checkbox";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import { ScrollArea } from "./ui/scroll-area";
+import { Checkbox } from "../ui/checkbox";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { ScrollArea } from "../ui/scroll-area";
 import MobileValidateBtn from "./MobileValidateBtn";
 
 interface BaseEntity {
@@ -14,7 +14,7 @@ interface BaseEntity {
   nombre_de_vehicules: number;
 }
 
-export default function MobileSideFiltersButton() {
+export default function MobilePopFiltersButton() {
   const [categories, setCategories] = useState<BaseEntity[]>([]);
   const [marques, setMarques] = useState<BaseEntity[]>([]);
   const [modeles, setModeles] = useState<BaseEntity[]>([]);

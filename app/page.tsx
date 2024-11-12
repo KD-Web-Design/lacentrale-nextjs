@@ -1,8 +1,8 @@
 import HeroBadge from "@/components/HeroBadge";
 import Navbar from "../components/Navbar";
 import SideFilters from "@/components/SideFilters";
-import FilterBtn from "@/components/MobileFilterBtn";
-import SortBtn from "@/components/MobileSortBtn";
+import FilterBtn from "@/components/mobile/MobileFilterBtn";
+import SortBtn from "@/components/mobile/MobileSortBtn";
 
 export default function Home() {
   return (

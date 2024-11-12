@@ -132,3 +132,19 @@ export const SideFiltersButtonPopoverName = [
   { id: 2, name: "Marque" },
   { id: 3, name: "Modèle" },
 ];
+
+export const gearBox = [
+  { id: 1, name: "Automatique" },
+  { id: 2, name: "Manuelle" },
+];
+
+export const priceIndex = [
+  { id: 1, name: "Très bonne affaire" },
+  { id: 2, name: "Bonne affaire" },
+  { id: 3, name: "Offre équitable" },
+];
+
+export const sellerType = [
+  { id: 1, type: "Particulier" },
+  { id: 2, type: "Professionnel" },
+];
