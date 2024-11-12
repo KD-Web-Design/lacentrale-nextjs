@@ -20,21 +20,25 @@ model Categories {
 }
 
 model Marques {
-  id                  Int       @id @default(autoincrement())
+  id                  Int    @id @default(autoincrement())
   nom                 String
   nombre_de_vehicules Int
-  Modeles             Modeles[]
 }
 
 model Modeles {
-  id                  Int     @id @default(autoincrement())
+  id                  Int    @id @default(autoincrement())
   nom                 String
   marque_id           Int
   nombre_de_vehicules Int
-  Marques             Marques @relation(fields: [marque_id], references: [id])
 }
 
 model Regions {
   id  Int    @id @default(autoincrement())
   nom String
+}
+
+model Equipements {
+  id                  Int    @id @default(autoincrement())
+  name                String
+  nombre_de_vehicules Int
 }
