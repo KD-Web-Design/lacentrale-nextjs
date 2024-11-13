@@ -28,7 +28,7 @@ model Marques {
 model Modeles {
   id                  Int    @id @default(autoincrement())
   nom                 String
-  marque_id           Int
+  marque_id           Int?
   nombre_de_vehicules Int
 }
 
@@ -41,4 +41,44 @@ model Equipements {
   id                  Int    @id @default(autoincrement())
   name                String
   nombre_de_vehicules Int
+}
+
+model NiveauEquipements {
+  id                  Int    @id @default(autoincrement())
+  name                String
+  nombre_de_vehicules Int
+}
+
+model CouleursExt {
+  id                  Int    @id @default(autoincrement())
+  name                String
+  nombre_de_vehicules Int
+}
+
+model CouleursInt {
+  id                  Int    @id @default(autoincrement())
+  name                String
+  nombre_de_vehicules Int
+}
+
+model ConsoMax {
+  id                  Int    @id @default(autoincrement())
+  name                String
+  nombre_de_vehicules Int
+}
+
+model CritAir {
+  id                  Int    @id @default(autoincrement())
+  name                String
+  nombre_de_vehicules Int
+}
+
+model NbPlaces {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model NbPortes {
+  id   Int    @id @default(autoincrement())
+  name String
 }
