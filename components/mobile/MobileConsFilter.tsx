@@ -1,12 +1,35 @@
+"use client";
+
 import { ChevronRight, XIcon } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollArea } from "../ui/scroll-area";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
 import MobileValidateBtn from "./MobileValidateBtn";
+import { EquipementsType } from "./MobileEquipmentFilter";
 
 export default function MobileConsFilter() {
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+  const [consoMax, setConsoMax] = useState<EquipementsType[]>([]);
+
+  const handleMenuClick = () => {
+    setIsOverlayVisible(true);
+  };
+
+  useEffect(() => {
+    const fetchConsoMax = async () => {
+      try {
+        const response = await fetch("/api/consoMax");
+        const data = await response.json();
+        setConsoMax(data);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des équipements:", error);
+      }
+    };
+
+    fetchConsoMax();
+  }, []);
   return (
     <main className="flex flex-col gap-4">
       <div className="flex flex-col font-semibold text-lg rounded-lg border overflow-hidden">
@@ -17,7 +40,7 @@ export default function MobileConsFilter() {
           <Link
             href="#"
             className="flex justify-between hover:text-accent"
-            // onClick={() => setIsOverlayVisible(true)}
+            onClick={() => handleMenuClick()}
           >
             <span className="text-sm font-normal">Consommation max</span>
             <ChevronRight size={24} />

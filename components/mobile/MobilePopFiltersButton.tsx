@@ -6,6 +6,7 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { ScrollArea } from "../ui/scroll-area";
 import MobileValidateBtn from "./MobileValidateBtn";
+import { formatNumber } from "@/lib/formatNumber";
 
 export interface BaseEntity {
   id: number;
@@ -68,7 +69,7 @@ export default function MobilePopFiltersButton() {
         >
           {item.nom}{" "}
           <span className="text-gray-400 text-xs ml-2">
-            ({item.nombre_de_vehicules})
+            ({formatNumber(item.nombre_de_vehicules)})
           </span>
           <Checkbox id={`${type}-${item.id}`} className="absolute right-2" />
         </Label>
