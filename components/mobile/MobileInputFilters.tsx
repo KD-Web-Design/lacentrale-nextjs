@@ -1,4 +1,6 @@
+import React from "react";
 import { Input } from "../ui/input";
+import { MobileFilterLayout } from "./layout/MobileFilterLayout";
 
 const MobileInputFiltersCategories = [
   {
@@ -11,22 +13,30 @@ const MobileInputFiltersCategories = [
   },
 ];
 
+type MinMaxInputsProps = {
+  placeholder1?: string;
+  placeholder2?: string;
+};
+
+function MinMaxInputs({
+  placeholder1 = "min",
+  placeholder2 = "max",
+}: MinMaxInputsProps) {
+  return (
+    <div className="w-full h-full flex items-center justify-between gap-3">
+      <Input placeholder={placeholder1} type="text" className="font-normal" />
+      <Input placeholder={placeholder2} type="text" />
+    </div>
+  );
+}
+
 export default function MobileInputFilters() {
   return (
     <main className="flex flex-col gap-4">
       {MobileInputFiltersCategories.map((category) => (
-        <div
-          key={category.id}
-          className="flex flex-col font-semibold text-lg rounded-lg border h-28 overflow-hidden"
-        >
-          <header className="bg-gray-100 w-full h-1/3 px-4 flex items-center">
-            <span className="font-semibold">{category.nom}</span>
-          </header>
-          <div className="w-full h-2/3 flex items-center justify-between gap-3 px-4 border">
-            <Input placeholder="min" type="text" className="font-normal" />
-            <Input placeholder="max" type="text" />
-          </div>
-        </div>
+        <MobileFilterLayout key={category.id} title={category.nom}>
+          <MinMaxInputs />
+        </MobileFilterLayout>
       ))}
     </main>
   );

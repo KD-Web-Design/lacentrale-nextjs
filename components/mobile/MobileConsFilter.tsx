@@ -9,6 +9,7 @@ import MobileValidateBtn from "./MobileValidateBtn";
 import { EquipementsType } from "./MobileEquipmentFilter";
 import { formatNumber } from "@/lib/formatNumber";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Input } from "../ui/input";
 
 type MenuType = "consoMax" | "critair" | "CO2" | null;
 
@@ -115,41 +116,56 @@ export default function MobileConsFilter() {
               defaultValue={`option-${consoMax[0]?.id}`}
               className="mt-3 space-y-2"
             >
-              {activeMenu === "consoMax"
-                ? consoMax.map((item) => (
-                    <Label
-                      key={item.id}
-                      htmlFor={`option-${item.id}`}
-                      className="cursor-pointer flex items-center rounded-sm relative mb-1"
-                    >
-                      {item.name} {""}
-                      <span className="text-gray-400 text-xs ml-2">
-                        ({formatNumber(item.nombre_de_vehicules)})
-                      </span>
-                      <RadioGroupItem
-                        value={`option-${item.id}`}
-                        id={`option-${item.id}`}
-                        className="absolute right-2"
-                      />
-                    </Label>
-                  ))
-                : critair.map((item) => (
-                    <Label
-                      key={item.id}
-                      htmlFor={`option-${item.id}`}
-                      className="cursor-pointer flex items-center rounded-sm relative mb-1"
-                    >
-                      {item.name} {""}
-                      <span className="text-gray-400 text-xs ml-2">
-                        ({formatNumber(item.nombre_de_vehicules)})
-                      </span>
-                      <RadioGroupItem
-                        value={`option-${item.id}`}
-                        id={`option-${item.id}`}
-                        className="absolute right-2"
-                      />
-                    </Label>
-                  ))}
+              {activeMenu === "consoMax" ? (
+                consoMax.map((item) => (
+                  <Label
+                    key={item.id}
+                    htmlFor={`option-${item.id}`}
+                    className="cursor-pointer flex items-center rounded-sm relative mb-1"
+                  >
+                    {item.name} {""}
+                    <span className="text-gray-400 text-xs ml-2">
+                      ({formatNumber(item.nombre_de_vehicules)})
+                    </span>
+                    <RadioGroupItem
+                      value={`option-${item.id}`}
+                      id={`option-${item.id}`}
+                      className="absolute right-2"
+                    />
+                  </Label>
+                ))
+              ) : activeMenu === "critair" ? (
+                critair.map((item) => (
+                  <Label
+                    key={item.id}
+                    htmlFor={`option-${item.id}`}
+                    className="cursor-pointer flex items-center rounded-sm relative mb-1"
+                  >
+                    {item.name} {""}
+                    <span className="text-gray-400 text-xs ml-2">
+                      ({formatNumber(item.nombre_de_vehicules)})
+                    </span>
+                    <RadioGroupItem
+                      value={`option-${item.id}`}
+                      id={`option-${item.id}`}
+                      className="absolute right-2"
+                    />
+                  </Label>
+                ))
+              ) : (
+                <div className="flex gap-2 p-2">
+                  <Input
+                    type="text"
+                    placeholder="min"
+                    className="border rounded p-2"
+                  />
+                  <Input
+                    type="text"
+                    placeholder="max"
+                    className="border rounded p-2"
+                  />
+                </div>
+              )}
             </RadioGroup>
           </ScrollArea>
           <footer className="inline-flex w-full justify-between items-center px-2 py-4">
