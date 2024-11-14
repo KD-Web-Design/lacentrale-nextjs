@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { XIcon, ChevronRight } from "lucide-react";
+import { XIcon, ChevronRight, MapPin } from "lucide-react";
 import { Input } from "../ui/input";
 import { ScrollArea } from "../ui/scroll-area";
 import { Label } from "../ui/label";
@@ -39,7 +39,17 @@ export default function MobileVehicleLoc() {
           <span className="font-semibold">Localisation des véhicules</span>
         </header>
         <div className="w-full flex flex-col gap-3 space-y-2 p-4 border">
-          <Input type="text" placeholder="Code postal" />
+          <div className="relative">
+            <Input
+              type="text"
+              placeholder="Code postal"
+              className="pl-8 font-normal"
+            />
+            <MapPin
+              size={16}
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400"
+            />
+          </div>
           <a
             href="#"
             className="flex justify-between hover:text-accent"

@@ -71,7 +71,10 @@ export default function MobilePopFiltersButton() {
           <span className="text-gray-400 text-xs ml-2">
             ({formatNumber(item.nombre_de_vehicules)})
           </span>
-          <Checkbox id={`${type}-${item.id}`} className="absolute right-2" />
+          <Checkbox
+            id={`${type}-${item.id}`}
+            className="absolute right-2 h-5 w-5"
+          />
         </Label>
       </div>
     ));
