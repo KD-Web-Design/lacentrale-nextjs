@@ -9,6 +9,9 @@ import PriceIndexFilter from "./PriceIndexFilter";
 import VehicleLoc from "./VehicleLoc";
 import SellerTypeFilter from "./SellerTypeFilter";
 import EquipmentFilter from "./EquipmentFilter";
+import ColorFilter from "./ColorFilter";
+import PerformanceFilter from "./PerformanceFilter";
+import ConsFilter from "./ConsFilter";
 
 export default function SideFilters() {
   return (
@@ -27,6 +30,9 @@ export default function SideFilters() {
         <VehicleLoc />
         <SellerTypeFilter />
         <EquipmentFilter />
+        <ColorFilter />
+        <PerformanceFilter />
+        <ConsFilter />
       </aside>
     </section>
   );

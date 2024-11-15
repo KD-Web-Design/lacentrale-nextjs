@@ -32,7 +32,7 @@ export default function CarburantFilter() {
           {carburants.map((type, index) => (
             <Label
               key={index}
-              className="cursor-pointer flex items-center gap-2 rounded-sm relative -z-10"
+              className="cursor-pointer flex items-center gap-2 rounded-sm relative"
               htmlFor={`carburant-${index}`}
             >
               <Checkbox id={`carburant-${index}`} />
