@@ -31,9 +31,6 @@ export default function MobileEquipmentFilter() {
   const filteredEquipements = equipements.filter((item) =>
     item?.name?.toLowerCase().includes(searchTerm?.toLowerCase() || "")
   );
-  const filteredNiveauEquipements = niveauEquipements.filter((item) =>
-    item?.name?.toLowerCase().includes(searchTerm?.toLowerCase() || "")
-  );
 
   const handleMenuClick = (menuType: MenuType) => {
     setActiveMenu(menuType);
@@ -137,7 +134,7 @@ export default function MobileEquipmentFilter() {
                   </Label>
                 </div>
               ))
-            : filteredNiveauEquipements.map((item) => (
+            : niveauEquipements.map((item) => (
                 <div key={item.id} className="mb-1">
                   <Label
                     htmlFor={`equipment-${item.id}`}

@@ -121,10 +121,35 @@ export const vousConseillerCategories: NavigationItem[] = [
 ];
 
 export const navigation: NavigationItem[] = [
-  { id: 1, name: "Acheter", href: "#", current: true, categories: acheterCategories, tableImage: "/images/acheter-desktop.png" },
-  { id: 2, name: "Vendre", href: "#", categories: vendreCategories, tableImage: "/images/vendre-desktop.png" },
-  { id: 3, name: "La Cote", href: "#", categories: laCoteCategories, tableImage: "/images/lacote-desktop.png" },
-  { id: 4, name: "Vous conseiller", href: "#", categories: vousConseillerCategories, tableImage: "/images/vous-conseiller-desktop.png" },
+  {
+    id: 1,
+    name: "Acheter",
+    href: "#",
+    current: true,
+    categories: acheterCategories,
+    tableImage: "/images/acheter-desktop.png",
+  },
+  {
+    id: 2,
+    name: "Vendre",
+    href: "#",
+    categories: vendreCategories,
+    tableImage: "/images/vendre-desktop.png",
+  },
+  {
+    id: 3,
+    name: "La Cote",
+    href: "#",
+    categories: laCoteCategories,
+    tableImage: "/images/lacote-desktop.png",
+  },
+  {
+    id: 4,
+    name: "Vous conseiller",
+    href: "#",
+    categories: vousConseillerCategories,
+    tableImage: "/images/vous-conseiller-desktop.png",
+  },
 ];
 
 export const SideFiltersButtonPopoverName = [
@@ -158,3 +183,8 @@ export const sortOptions = [
   { id: 6, option: "Annonce les plus récentes" },
   { id: 7, option: "Véhicules les plus récents" },
 ];
+
+export interface Region {
+  id: number;
+  nom: string;
+}

@@ -8,11 +8,7 @@ import { MobileFilterOverlay } from "./overlay/MobileFilterOverlay";
 import { ScrollArea } from "../ui/scroll-area";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
-
-interface Region {
-  id: number;
-  nom: string;
-}
+import { Region } from "@/data/navigationData";
 
 export default function MobileVehicleLoc() {
   const [regions, setRegions] = useState<Region[]>([]);

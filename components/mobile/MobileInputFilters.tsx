@@ -2,7 +2,7 @@ import React from "react";
 import { Input } from "../ui/input";
 import { MobileFilterLayout } from "./layout/MobileFilterLayout";
 
-const MobileInputFiltersCategories = [
+export const MobileInputFiltersCategories = [
   {
     id: 1,
     nom: "Année",
