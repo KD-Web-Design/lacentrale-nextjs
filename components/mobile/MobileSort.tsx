@@ -6,7 +6,7 @@ import { Label } from "../ui/label";
 
 export default function MobileSort({ onClose }: { onClose: () => void }) {
   return (
-    <div className="inset-0 fixed bg-white lg:hidden overflow-y-scroll px-1 ">
+    <div className="inset-0 fixed bg-white lg:hidden overflow-y-scroll px-1 z-20">
       <div
         className="border-b-2 relative flex items-center justify-center py-4 mb-2"
         id="topbar"

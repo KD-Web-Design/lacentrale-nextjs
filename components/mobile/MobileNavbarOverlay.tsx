@@ -11,7 +11,7 @@ export default function NavbarMobileOverlay({
   onClose,
 }: NavbarMobileOverlayProps) {
   return (
-    <div className="h-screen w-full fixed bg-white lg:hidden overflow-scroll">
+    <div className="h-screen w-full fixed bg-white lg:hidden overflow-scroll z-20">
       <div className="w-full h-14 p-1 inline-flex items-center border border-b-2 border-b-gray-200">
         <ArrowLeft
           size={28}

@@ -11,7 +11,7 @@ export default function Navbar() {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   return (
     <>
-      <nav className="w-full h-14 lg:h-[4.5rem] px-3 shadow-md fixed bg-white">
+      <nav className="w-full h-14 lg:h-[4.5rem] px-3 shadow-md fixed bg-white z-10">
         <div className="flex h-full justify-between max-w-6xl m-auto">
           <div className="inline-flex items-center gap-2">
             <MenuIcon

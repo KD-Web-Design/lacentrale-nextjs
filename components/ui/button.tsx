@@ -21,7 +21,9 @@ const buttonVariants = cva(
           "hover:bg-accent hover:text-accent-foreground hover:animate-darken-left-to-right",
         link: "text-primary underline-offset-4 hover:underline",
         myvariant:
-          "bg-primary text-primary-foreground shadow hover:bg-red-600 hover:animate-darken-left-to-right",
+          "border border-input bg-background shadow-sm hover:animate-darken-left-to-right",
+        myvariant2:
+          "bg-accent text-primary-foreground shadow font-bold text-lg",
       },
       size: {
         default: "h-9 px-4 py-2",
