@@ -1,6 +1,6 @@
 import { XIcon } from "lucide-react";
 import React from "react";
-import MobileValidateBtn from "../MobileValidateBtn";
+import MobileValidateBtn from "../filters/MobileValidateBtn";
 
 type MobileFilterOverlayProps = {
   isVisible: boolean;

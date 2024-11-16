@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { SlidersHorizontal } from "lucide-react";
-import MobileFilters from "./MobileFilters";
+import MobileFilters from "./filters/MobileFilters";
 
 export default function FilterBtn() {
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);

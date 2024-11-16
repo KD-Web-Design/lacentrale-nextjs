@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { ArrowDownWideNarrow } from "lucide-react";
-import MobileSort from "./MobileSort";
+import MobileSort from "./filters/MobileSort";
 
 export default function SortBtn() {
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
