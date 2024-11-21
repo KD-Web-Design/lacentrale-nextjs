@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="p-4">
+      <main className="p-4 pb-0">
         <HeroBadge />
         <MainSection />
         <div className="grid grid-cols-2 gap-2 lg:hidden mt-4">

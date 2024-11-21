@@ -19,7 +19,7 @@ import VehicleLocFilter from "./filters/VehicleLocFilter";
 
 export default function AsideFilters() {
   return (
-    <aside className="w-72 flex flex-col border-r border-gray-">
+    <aside className="w-72 flex flex-col">
       <section className="px-4 space-y-5">
         <span className="font-semibold text-xl inline-flex items-center gap-2">
           <SlidersVertical size={20} />

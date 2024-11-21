@@ -53,7 +53,7 @@ export default function MobileFilters({ onClose }: { onClose: () => void }) {
         <Button
           className="bg-accent text-lg font-bold px-20"
           size="lg"
-          variant="myvariant"
+          variant="myvariant2"
         >
           Rechercher (322 255)
         </Button>
