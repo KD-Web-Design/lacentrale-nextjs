@@ -18,7 +18,7 @@ export function AccordionNavMobile() {
   return (
     <Accordion type="multiple" className="w-full">
       {navigation.map((item, index) => (
-        <AccordionItem key={index} value={`item-${index}`} className="">
+        <AccordionItem key={index} value={`item-${index}`}>
           <AccordionTrigger
             className={`font-semibold text-md ${
               item.current === true ? "text-accent" : "hover:text-gray-600"
