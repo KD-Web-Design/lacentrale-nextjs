@@ -33,7 +33,7 @@ export default function MobileVehicleLoc() {
     <MobileFilterLayout title="Localisation des véhicules">
       <div className="relative">
         <Input
-          type="text"
+          type="number"
           placeholder="Code postal"
           className="pl-8 font-normal"
         />

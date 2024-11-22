@@ -12,8 +12,8 @@ export default function InputFilters() {
               <span className="font-semibold text-md">{category.nom}</span>
             </div>
             <div className="flex gap-2 p-4">
-              <Input placeholder="min" className="rounded" />
-              <Input placeholder="max" className="rounded" />
+              <Input placeholder="min" className="rounded" type="number" />
+              <Input placeholder="max" className="rounded" type="number" />
             </div>
           </div>
         </div>

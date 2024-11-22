@@ -24,8 +24,8 @@ function MinMaxInputs({
 }: MinMaxInputsProps) {
   return (
     <div className="w-full h-full flex items-center justify-between gap-3">
-      <Input placeholder={placeholder1} type="text" className="font-normal" />
-      <Input placeholder={placeholder2} type="text" />
+      <Input placeholder={placeholder1} type="number" className="font-normal" />
+      <Input placeholder={placeholder2} type="number" className="font-normal" />
     </div>
   );
 }

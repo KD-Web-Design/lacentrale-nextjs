@@ -1,10 +1,10 @@
-import React from "react";
+"use client";
 
+import React, { useState } from "react";
 import {
   BadgeEuro,
   CalendarDays,
   CircleGauge,
-  Heart,
   MapPin,
   Settings,
   Wrench,
@@ -14,8 +14,32 @@ import Image from "next/image";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { MobileVehicleCardProps } from "./mobile/MobileVehicleCard";
+import { HeartFilledIcon, HeartIcon } from "@radix-ui/react-icons";
+import { useToast } from "@/hooks/use-toast";
+import { ToastAction } from "./ui/toast";
 
 export default function VehicleCard({ index }: MobileVehicleCardProps) {
+  const [isFavorite, setIsFavorite] = useState(false);
+  const { toast } = useToast();
+
+  const showToast = () => {
+    setIsFavorite((prev) => !prev);
+    // Afficher le toast uniquement quand isFavorite devient true
+    if (!isFavorite) {
+      toast({
+        title: "Annonce ajoutée aux favoris",
+        description: "Notifiez le vendeur de votre intérêt pour son annonce",
+        action: (
+          <ToastAction
+            altText="Annuler l'ajout aux favoris"
+            onClick={() => setIsFavorite(false)}
+          >
+            Annuler
+          </ToastAction>
+        ),
+      });
+    }
+  };
   return (
     <main>
       <Card className="flex overflow-hidden cursor-pointer border border-black">
@@ -76,8 +100,13 @@ export default function VehicleCard({ index }: MobileVehicleCardProps) {
               variant="secondary"
               size="icon"
               className="bg-white border group"
+              onClick={showToast}
             >
-              <Heart className="group-hover:text-accent" />
+              {isFavorite ? (
+                <HeartFilledIcon className="text-accent" />
+              ) : (
+                <HeartIcon className="group-hover:text-accent" />
+              )}
             </Button>
           </div>
         </CardContent>

@@ -1,10 +1,11 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Card, CardContent, CardFooter } from "../ui/card";
 import {
   BadgeEuro,
   CalendarDays,
   CircleGauge,
-  Heart,
   MapPin,
   Phone,
   Settings,
@@ -13,12 +14,36 @@ import {
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import Image from "next/image";
+import { useToast } from "@/hooks/use-toast";
+import { ToastAction } from "../ui/toast";
+import { HeartFilledIcon, HeartIcon } from "@radix-ui/react-icons";
 
 export interface MobileVehicleCardProps {
   index: number;
 }
 
 export default function MobileVehicleCard({ index }: MobileVehicleCardProps) {
+  const [isFavorite, setIsFavorite] = useState(false);
+  const { toast } = useToast();
+
+  const showToast = () => {
+    setIsFavorite((prev) => !prev);
+    // Afficher le toast uniquement quand isFavorite devient true
+    if (!isFavorite) {
+      toast({
+        title: "Annonce ajoutée aux favoris",
+        description: "Notifiez le vendeur de votre intérêt pour son annonce",
+        action: (
+          <ToastAction
+            altText="Annuler l'ajout aux favoris"
+            onClick={() => setIsFavorite(false)}
+          >
+            Annuler
+          </ToastAction>
+        ),
+      });
+    }
+  };
   return (
     <Card className="overflow-hidden cursor-pointer border border-black">
       <CardContent className="grid grid-cols-3 gap-1 p-0  aspect-[16/9] relative max-h-[208px] w-full">
@@ -107,8 +132,13 @@ export default function MobileVehicleCard({ index }: MobileVehicleCardProps) {
               variant="secondary"
               size="icon"
               className="bg-white border group"
+              onClick={showToast}
             >
-              <Heart className="group-hover:text-accent" />
+              {isFavorite ? (
+                <HeartFilledIcon className="text-accent" />
+              ) : (
+                <HeartIcon className="group-hover:text-accent" />
+              )}
             </Button>
             <Button size="icon">
               <Phone />

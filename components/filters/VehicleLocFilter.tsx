@@ -37,7 +37,7 @@ export default function VehicleLocFilter() {
         <div className="flex flex-col gap-2 p-4 space-y-2">
           <div className="relative">
             <Input
-              type="text"
+              type="number"
               placeholder="Code postal"
               className="pl-8 font-normal"
             />
