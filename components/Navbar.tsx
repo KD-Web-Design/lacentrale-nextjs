@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import {
   CirclePlus,
@@ -14,11 +14,55 @@ import NavbarMobileOverlay from "./mobile/MobileNavbarOverlay";
 import { NavbarHoverCard } from "./NavbarHoverCard";
 import { Button } from "./ui/button";
 
+const useScrollDirection = () => {
+  const [isVisible, setIsVisible] = React.useState(true);
+  const [lastScrollY, setLastScrollY] = React.useState(0);
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 1024); // 1024px correspond à lg: dans Tailwind
+    };
+
+    // Check initial screen size
+    checkScreenSize();
+
+    // Add resize listener
+    window.addEventListener("resize", checkScreenSize);
+
+    const handleScroll = () => {
+      if (!isMobile) {
+        setIsVisible(true);
+        return;
+      }
+
+      const currentScrollY = window.scrollY;
+      setIsVisible(currentScrollY <= lastScrollY || currentScrollY < 10);
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", checkScreenSize);
+    };
+  }, [lastScrollY, isMobile]);
+
+  return isVisible;
+};
+
 export default function Navbar() {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const isVisible = useScrollDirection();
+
   return (
     <>
-      <nav className="w-full h-14 lg:h-[4.5rem] px-3 shadow-md fixed bg-white z-10">
+      <nav
+        className={`w-full h-14 lg:h-[4.5rem] px-3 shadow-md fixed top-0 bg-white z-10 transition-transform duration-300 ${
+          isVisible ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
         <div className="flex h-full justify-between max-w-6xl m-auto">
           <div className="flex gap-1">
             <div className="inline-flex items-center gap-2">

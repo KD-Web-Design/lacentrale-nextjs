@@ -88,11 +88,21 @@ export default function Footer() {
           <h1 className="font-semibold text-lg">
             Télécharger l&apos;application
           </h1>
-          <a href="#" className="text-sm underline">
-            Télécharger l&apos;appli pour Android
+          <a href="#" className="w-fit">
+            <Image
+              src="/logos/playstore.png"
+              alt="logo Play Store"
+              width={130}
+              height={130}
+            />
           </a>
-          <a href="#" className="text-sm underline">
-            Télécharger l&apos;appli pour IOS
+          <a href="#" className="w-fit mb-4">
+            <Image
+              src="/logos/appstore.svg"
+              alt="logo App Store"
+              width={130}
+              height={130}
+            />
           </a>
           <Image
             src="/logos/trustpilot.svg"
@@ -112,11 +122,47 @@ export default function Footer() {
         </div>
       </div>
       <Button
-        className="w-fit mx-auto bg-white text-black font-bold text-lg px-4"
+        className="w-fit mx-auto bg-white text-black font-bold text-lg px-4 relative group overflow-hidden"
         size="lg"
+        variant="myvariant2"
       >
-        Accès client pro
+        <span className="relative z-10">Accès client pro</span>
+        <span className="absolute inset-0 bg-gray-200 scale-x-0 group-hover:scale-x-100 transform transition-transform duration-300 origin-left" />
       </Button>
+      <div className="w-full border-t border-gray-400 mt-6 flex flex-col justify-center items-center gap-4 p-6 pb-2">
+        <div className="relative w-full flex items-center justify-center">
+          <a href="" className="underline font-semibold text-sm">
+            Plan du site
+          </a>
+          <div className="absolute top-0 right-0 flex gap-12">
+            <Image
+              src="/logos/facebook.svg"
+              alt="logo facebook"
+              width={22}
+              height={22}
+            />
+            <Image
+              src="/logos/linkedin.svg"
+              alt="logo linkedin"
+              width={22}
+              height={22}
+            />
+            <Image
+              src="/logos/youtube.svg"
+              alt="logo youtube"
+              width={22}
+              height={22}
+            />
+          </div>
+        </div>
+        <span className="text-sm">
+          Au quotidien, prenez les transports en commun #SeDéplacerMoinsPolluer
+        </span>
+        <span className="text-xs">
+          Copyright ® Groupe La Centrale - Tous droits réservés
+        </span>
+        <span className="text-xs">Réalisé par KD Web Design</span>
+      </div>
     </footer>
   );
 }

@@ -18,47 +18,37 @@ import { CirclePlus } from "lucide-react";
 
 export function AccordionNavMobile() {
   return (
-    <>
-      <div className="w-full bg-muted flex flex-col gap-2 items-center justify-center rounded px-4 py-2">
-        <span className="font-semibold text-sm">
-          Vendre mon véhicule gratuitement
-        </span>
-        <Button className="w-full font-bold">
-          <CirclePlus size={24} />
-          Déposer mon annonce
-        </Button>
-      </div>
-      <Accordion type="multiple" className="w-full">
-        {navigation.map((item, index) => (
-          <AccordionItem key={index} value={`item-${index}`} className="">
-            <AccordionTrigger
-              className={`font-semibold text-md ${
-                item.current === true ? "text-accent" : "hover:text-gray-600"
-              }`}
-            >
-              {item.name}
-            </AccordionTrigger>
-            <AccordionContent>
-              {item.id === 1 && (
-                <div className="flex flex-col gap-1">
-                  {acheterCategories.map((category, catIndex) => (
-                    <Link
-                      key={catIndex}
-                      href="#"
-                      className="flex flex-col my-2 px-6 gap-1 w-fit"
-                    >
-                      {category.Icon && (
-                        <div
-                          className={`flex items-center ${
-                            category.name === "Voitures occasions"
-                              ? "text-accent"
-                              : "hover:text-gray-600"
-                          }`}
-                        >
-                          <category.Icon className="mr-2 h-4 w-4" />
-                          <h3 className="font-semibold">{category.name}</h3>
-                        </div>
-                      )}
+    <Accordion type="multiple" className="w-full">
+      {navigation.map((item, index) => (
+        <AccordionItem key={index} value={`item-${index}`}>
+          <AccordionTrigger
+            className={`font-semibold text-md ${
+              item.current === true ? "text-accent" : "hover:text-gray-600"
+            }`}
+          >
+            {item.name}
+          </AccordionTrigger>
+          <AccordionContent>
+            {item.id === 1 && (
+              <div className="flex flex-col gap-1">
+                {acheterCategories.map((category, catIndex) => (
+                  <Link
+                    key={catIndex}
+                    href="#"
+                    className="flex flex-col my-2 px-6 gap-1 w-fit"
+                  >
+                    {category.Icon && (
+                      <div
+                        className={`flex items-center ${
+                          category.name === "Voitures occasions"
+                            ? "text-accent"
+                            : "hover:text-gray-600"
+                        }`}
+                      >
+                        <category.Icon className="mr-2 h-4 w-4" />
+                        <h3 className="font-semibold">{category.name}</h3>
+                      </div>
+                    )}
 
                       <span className="text-xs text-gray-500">
                         {category.description}
