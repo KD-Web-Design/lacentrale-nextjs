@@ -1,41 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { SideFiltersButtonPopoverName } from "@/data/navigationData";
+import React, { useState } from "react";
+import {
+  BaseEntity,
+  SideFiltersButtonPopoverName,
+} from "@/data/navigationData";
 import { ChevronRight, Search, XIcon } from "lucide-react";
 import { Checkbox } from "../../ui/checkbox";
 import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
 import { ScrollArea } from "../../ui/scroll-area";
 import MobileValidateBtn from "./MobileValidateBtn";
-
-interface BaseEntity {
-  id: number;
-  nom: string;
-  marque_id?: number;
-  nombre_de_vehicules: number;
-}
+import { useApi } from "@/hooks/useApi";
 
 export default function MobileSideFiltersButton() {
-  const [categories, setCategories] = useState<BaseEntity[]>([]);
-  const [marques, setMarques] = useState<BaseEntity[]>([]);
-  const [modeles, setModeles] = useState<BaseEntity[]>([]);
+  const categories = useApi<BaseEntity>("/api/categories");
+  const marques = useApi<BaseEntity>("/api/marques");
+  const modeles = useApi<BaseEntity>("/api/modeles");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [activePopover, setActivePopover] = useState<string | null>(null);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async <T extends BaseEntity>(
-      url: string,
-      setState: React.Dispatch<React.SetStateAction<T[]>>
-    ) => {
-      const response = await fetch(url);
-      const data = await response.json();
-      setState(data);
-    };
-
-    fetchData<BaseEntity>("/api/categories", setCategories);
-    fetchData<BaseEntity>("/api/marques", setMarques);
-    fetchData<BaseEntity>("/api/modeles", setModeles);
-  }, []);
 
   const filterItems = (items: BaseEntity[]) =>
     items.filter((item) =>

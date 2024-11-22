@@ -1,51 +1,23 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { EquipementsType } from "../mobile/filters/MobileEquipmentFilter";
+import React, { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { ChevronRight, Search } from "lucide-react";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
 import { Input } from "../ui/input";
 import { formatNumber } from "@/lib/formatNumber";
+import { EquipementsType } from "@/data/navigationData";
+import { useApi } from "@/hooks/useApi";
 
 export default function EquipmentFilter() {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [equipements, setEquipements] = useState<EquipementsType[]>([]);
-  const [niveauEquipements, setNiveauEquipements] = useState<EquipementsType[]>(
-    []
-  );
+  const equipements = useApi<EquipementsType>("/api/equipements");
+  const niveauEquipements = useApi<EquipementsType>("/api/niveauEquipements");
 
   const filteredEquipements = equipements.filter((item) =>
     item?.name?.toLowerCase().includes(searchTerm?.toLowerCase() || "")
   );
-  useEffect(() => {
-    const fetchEquipements = async () => {
-      try {
-        const response = await fetch("/api/equipements");
-        const data = await response.json();
-        setEquipements(data);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des équipements:", error);
-      }
-    };
-
-    fetchEquipements();
-  }, []);
-
-  useEffect(() => {
-    const fetchNiveauEquipements = async () => {
-      try {
-        const response = await fetch("/api/niveauEquipements");
-        const data = await response.json();
-        setNiveauEquipements(data);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des équipements:", error);
-      }
-    };
-
-    fetchNiveauEquipements();
-  }, []);
 
   return (
     <div className="rounded-lg border overflow-hidden">

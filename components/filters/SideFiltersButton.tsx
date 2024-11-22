@@ -5,40 +5,22 @@ import { Input } from "../ui/input";
 import { Checkbox } from "../ui/checkbox";
 import { Popover, PopoverTrigger, PopoverContent } from "../ui/popover";
 import { Label } from "../ui/label";
-import { useEffect, useState } from "react";
-import { SideFiltersButtonPopoverName } from "@/data/navigationData";
+import { useState } from "react";
+import {
+  BaseEntity,
+  SideFiltersButtonPopoverName,
+} from "@/data/navigationData";
 import { ScrollArea } from "../ui/scroll-area";
-
-// Interfaces
-interface BaseEntity {
-  id: number;
-  nom: string;
-  marque_id?: number;
-  nombre_de_vehicules: number;
-}
+import { useApi } from "@/hooks/useApi";
+import { formatNumber } from "@/lib/formatNumber";
 
 export default function SideFiltersButton() {
   // Gestion d'états
-  const [categories, setCategories] = useState<BaseEntity[]>([]);
-  const [marques, setMarques] = useState<BaseEntity[]>([]);
-  const [modeles, setModeles] = useState<BaseEntity[]>([]);
+  const categories = useApi<BaseEntity>("/api/categories");
+  const marques = useApi<BaseEntity>("/api/marques");
+  const modeles = useApi<BaseEntity>("/api/modeles");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [activePopover, setActivePopover] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchData = async <T extends BaseEntity>(
-      url: string,
-      setState: React.Dispatch<React.SetStateAction<T[]>>
-    ) => {
-      const response = await fetch(url);
-      const data = await response.json();
-      setState(data);
-    };
-
-    fetchData<BaseEntity>("/api/categories", setCategories);
-    fetchData<BaseEntity>("/api/marques", setMarques);
-    fetchData<BaseEntity>("/api/modeles", setModeles);
-  }, []);
 
   // Fonctions utilitaires pour gérer la recherche dans l'Input
   const filterItems = (items: BaseEntity[]) =>
@@ -71,7 +53,7 @@ export default function SideFiltersButton() {
         <Label htmlFor={`${type}-${item.id}`} className="cursor-pointer">
           {item.nom}{" "}
           <span className="text-gray-400 text-xs ml-1">
-            ({item.nombre_de_vehicules})
+            ({formatNumber(item.nombre_de_vehicules)})
           </span>
         </Label>
       </div>

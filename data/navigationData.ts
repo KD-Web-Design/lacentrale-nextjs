@@ -189,3 +189,33 @@ export interface Region {
   nom: string;
 }
 
+export interface useApiData {
+  type: string;
+}
+
+
+export interface ConsoData {
+  id: number;
+  value: number;
+  name: string;
+ 
+}
+
+export interface CritairData {
+  id: number;
+  level: string;
+  
+}
+
+export type EquipementsType = {
+  id: number;
+  name: string;
+  nombre_de_vehicules: number;
+};
+
+export interface BaseEntity {
+  id: number;
+  nom: string;
+  marque_id?: number;
+  nombre_de_vehicules: number;
+} 

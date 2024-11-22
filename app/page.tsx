@@ -5,6 +5,7 @@ import FilterBtn from "@/components/mobile/MobileFilterBtn";
 import SortBtn from "@/components/mobile/MobileSortBtn";
 import MobileMainSection from "@/components/mobile/MobileMainSection";
 import MobileFooter from "@/components/mobile/MobileFooter";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <MobileMainSection />
         <MobileFooter />
       </main>
+      <Footer />
     </>
   );
 }

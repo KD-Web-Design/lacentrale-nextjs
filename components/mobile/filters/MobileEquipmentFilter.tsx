@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ChevronRight, Search } from "lucide-react";
 import Link from "next/link";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
@@ -10,12 +10,8 @@ import { Input } from "../../ui/input";
 import { formatNumber } from "@/lib/formatNumber";
 import { MobileFilterLayout } from "../layout/MobileFilterLayout";
 import { MobileFilterOverlay } from "../overlay/MobileFilterOverlay";
-
-export type EquipementsType = {
-  id: number;
-  name: string;
-  nombre_de_vehicules: number;
-};
+import { EquipementsType } from "@/data/navigationData";
+import { useApi } from "@/hooks/useApi";
 
 type MenuType = "equipements" | "niveauEquipements" | null;
 
@@ -23,10 +19,8 @@ export default function MobileEquipmentFilter() {
   const [activeMenu, setActiveMenu] = useState<MenuType>(null);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [equipements, setEquipements] = useState<EquipementsType[]>([]);
-  const [niveauEquipements, setNiveauEquipements] = useState<EquipementsType[]>(
-    []
-  );
+  const equipements = useApi<EquipementsType>("/api/equipements");
+  const niveauEquipements = useApi<EquipementsType>("/api/niveauEquipements");
 
   const filteredEquipements = equipements.filter((item) =>
     item?.name?.toLowerCase().includes(searchTerm?.toLowerCase() || "")
@@ -42,34 +36,6 @@ export default function MobileEquipmentFilter() {
     setIsOverlayVisible(false);
     setActiveMenu(null);
   };
-
-  useEffect(() => {
-    const fetchEquipements = async () => {
-      try {
-        const response = await fetch("/api/equipements");
-        const data = await response.json();
-        setEquipements(data);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des équipements:", error);
-      }
-    };
-
-    fetchEquipements();
-  }, []);
-
-  useEffect(() => {
-    const fetchNiveauEquipements = async () => {
-      try {
-        const response = await fetch("/api/niveauEquipements");
-        const data = await response.json();
-        setNiveauEquipements(data);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des équipements:", error);
-      }
-    };
-
-    fetchNiveauEquipements();
-  }, []);
 
   return (
     <MobileFilterLayout title="Equipements & options">

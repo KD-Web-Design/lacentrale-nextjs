@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
@@ -9,15 +9,16 @@ import { Checkbox } from "../../ui/checkbox";
 import { formatNumber } from "@/lib/formatNumber";
 import { MobileFilterLayout } from "../layout/MobileFilterLayout";
 import { MobileFilterOverlay } from "../overlay/MobileFilterOverlay";
-import { EquipementsType } from "./MobileEquipmentFilter";
+import { useApi } from "@/hooks/useApi";
+import { EquipementsType } from "@/data/navigationData";
 
 type MenuType = "couleursExt" | "couleursInt" | null;
 
 export default function MobileColorFilter() {
   const [activeMenu, setActiveMenu] = useState<MenuType>(null);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
-  const [couleursExt, setCouleursExt] = useState<EquipementsType[]>([]);
-  const [couleursInt, setCouleursInt] = useState<EquipementsType[]>([]);
+  const couleursExt = useApi<EquipementsType>("/api/couleursExt");
+  const couleursInt = useApi<EquipementsType>("/api/couleursInt");
 
   const handleMenuClick = (menuType: MenuType) => {
     setActiveMenu(menuType);
@@ -28,34 +29,6 @@ export default function MobileColorFilter() {
     setIsOverlayVisible(false);
     setActiveMenu(null);
   };
-
-  useEffect(() => {
-    const fetchCouleursExt = async () => {
-      try {
-        const response = await fetch("/api/couleursExt");
-        const data = await response.json();
-        setCouleursExt(data);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des équipements:", error);
-      }
-    };
-
-    fetchCouleursExt();
-  }, []);
-
-  useEffect(() => {
-    const fetchCouleursInt = async () => {
-      try {
-        const response = await fetch("/api/couleursInt");
-        const data = await response.json();
-        setCouleursInt(data);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des équipements:", error);
-      }
-    };
-
-    fetchCouleursInt();
-  }, []);
 
   return (
     <MobileFilterLayout title="Couleurs">

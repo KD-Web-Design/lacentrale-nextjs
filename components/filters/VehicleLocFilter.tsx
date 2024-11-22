@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Input } from "../ui/input";
 import { ChevronRight, MapPin } from "lucide-react";
 import Link from "next/link";
@@ -10,22 +10,11 @@ import { Popover, PopoverTrigger } from "../ui/popover";
 import { PopoverContent } from "@radix-ui/react-popover";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
+import { useApi } from "@/hooks/useApi";
 
 export default function VehicleLocFilter() {
-  const [regions, setRegions] = useState<Region[]>([]);
+  const regions = useApi<Region>("api/regions");
 
-  useEffect(() => {
-    const fetchRegions = async () => {
-      const response = await fetch("/api/regions");
-      const data = await response.json();
-      const sortedData = data.sort((a: Region, b: Region) =>
-        a.nom.localeCompare(b.nom)
-      );
-      setRegions(sortedData);
-    };
-
-    fetchRegions();
-  }, []);
   return (
     <div className="rounded-lg border overflow-hidden">
       <div>

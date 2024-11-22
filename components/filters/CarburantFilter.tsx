@@ -1,27 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
+import { useApi } from "@/hooks/useApi";
+import { useApiData } from "@/data/navigationData";
 
 export default function CarburantFilter() {
-  const [carburants, setCarburants] = useState<string[]>([]);
-
-  useEffect(() => {
-    const fetchCarburants = async () => {
-      try {
-        const response = await fetch("/api/carburant");
-        const data = await response.json();
-        setCarburants(
-          data.map((carburant: { type: string }) => carburant.type)
-        );
-      } catch (error) {
-        console.error("Erreur lors de la récupération des carburants:", error);
-      }
-    };
-
-    fetchCarburants();
-  }, []);
+  const carburants = useApi<string, useApiData>("/api/carburant", (data) =>
+    data.map((c) => c.type)
+  );
   return (
     <div className="rounded-lg border overflow-hidden">
       <div>

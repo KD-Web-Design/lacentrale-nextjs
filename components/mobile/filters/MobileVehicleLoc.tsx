@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ChevronRight, MapPin } from "lucide-react";
 import { Input } from "../../ui/input";
 import { MobileFilterLayout } from "../layout/MobileFilterLayout";
@@ -9,23 +9,11 @@ import { ScrollArea } from "../../ui/scroll-area";
 import { Label } from "../../ui/label";
 import { Checkbox } from "../../ui/checkbox";
 import { Region } from "@/data/navigationData";
+import { useApi } from "@/hooks/useApi";
 
 export default function MobileVehicleLoc() {
-  const [regions, setRegions] = useState<Region[]>([]);
+  const regions = useApi<Region>("api/regions");
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
-
-  useEffect(() => {
-    const fetchRegions = async () => {
-      const response = await fetch("/api/regions");
-      const data = await response.json();
-      const sortedData = data.sort((a: Region, b: Region) =>
-        a.nom.localeCompare(b.nom)
-      );
-      setRegions(sortedData);
-    };
-
-    fetchRegions();
-  }, []);
 
   const filteredRegions = regions.filter((region) => region.nom.toLowerCase());
 

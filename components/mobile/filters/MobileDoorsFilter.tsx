@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { ScrollArea } from "../../ui/scroll-area";
@@ -8,15 +8,17 @@ import { Label } from "../../ui/label";
 import { Checkbox } from "../../ui/checkbox";
 import { MobileFilterLayout } from "../layout/MobileFilterLayout";
 import { MobileFilterOverlay } from "../overlay/MobileFilterOverlay";
-import { EquipementsType } from "./MobileEquipmentFilter";
+
+import { useApi } from "@/hooks/useApi";
+import { EquipementsType } from "@/data/navigationData";
 
 type MenuType = "nbPlaces" | "nbPortes" | null;
 
 export default function MobileDoorsFilter() {
   const [activeMenu, setActiveMenu] = useState<MenuType>(null);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
-  const [nbPlaces, setNbPlaces] = useState<EquipementsType[]>([]);
-  const [nbPortes, setNbPortes] = useState<EquipementsType[]>([]);
+  const nbPlaces = useApi<EquipementsType>("/api/nbplaces");
+  const nbPortes = useApi<EquipementsType>("/api/nbportes");
 
   const handleMenuClick = (menuType: MenuType) => {
     setActiveMenu(menuType);
@@ -27,34 +29,6 @@ export default function MobileDoorsFilter() {
     setIsOverlayVisible(false);
     setActiveMenu(null);
   };
-
-  useEffect(() => {
-    const fetchNbPlaces = async () => {
-      try {
-        const response = await fetch("/api/nbplaces");
-        const data = await response.json();
-        setNbPlaces(data);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des places:", error);
-      }
-    };
-
-    fetchNbPlaces();
-  }, []);
-
-  useEffect(() => {
-    const fetchNbPortes = async () => {
-      try {
-        const response = await fetch("/api/nbportes");
-        const data = await response.json();
-        setNbPortes(data);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des portes:", error);
-      }
-    };
-
-    fetchNbPortes();
-  }, []);
 
   return (
     <MobileFilterLayout title="Places & Portes">

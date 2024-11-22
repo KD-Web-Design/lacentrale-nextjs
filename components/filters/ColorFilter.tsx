@@ -1,44 +1,18 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { ChevronRight } from "lucide-react";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
 import { formatNumber } from "@/lib/formatNumber";
-import { EquipementsType } from "../mobile/filters/MobileEquipmentFilter";
+import { useApi } from "@/hooks/useApi";
+import { EquipementsType } from "@/data/navigationData";
 
 export default function ColorFilter() {
-  const [couleursExt, setCouleursExt] = useState<EquipementsType[]>([]);
-  const [couleursInt, setCouleursInt] = useState<EquipementsType[]>([]);
+  const couleursExt = useApi<EquipementsType>("/api/couleursExt");
+  const couleursInt = useApi<EquipementsType>("/api/couleursInt");
 
-  useEffect(() => {
-    const fetchCouleursExt = async () => {
-      try {
-        const response = await fetch("/api/couleursExt");
-        const data = await response.json();
-        setCouleursExt(data);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des équipements:", error);
-      }
-    };
-
-    fetchCouleursExt();
-  }, []);
-
-  useEffect(() => {
-    const fetchCouleursInt = async () => {
-      try {
-        const response = await fetch("/api/couleursInt");
-        const data = await response.json();
-        setCouleursInt(data);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des équipements:", error);
-      }
-    };
-
-    fetchCouleursInt();
-  }, []);
   return (
     <div className="rounded-lg border overflow-hidden">
       <div>

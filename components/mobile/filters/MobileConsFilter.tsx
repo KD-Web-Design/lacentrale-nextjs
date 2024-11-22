@@ -2,55 +2,29 @@
 
 import { ChevronRight, XIcon } from "lucide-react";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ScrollArea } from "../../ui/scroll-area";
 import { Label } from "../../ui/label";
 import MobileValidateBtn from "./MobileValidateBtn";
-import { EquipementsType } from "./MobileEquipmentFilter";
 import { formatNumber } from "@/lib/formatNumber";
 import { RadioGroup, RadioGroupItem } from "../../ui/radio-group";
 import { Input } from "../../ui/input";
+import { useApi } from "@/hooks/useApi";
+import { EquipementsType } from "@/data/navigationData";
 
 type MenuType = "consoMax" | "critair" | "CO2" | null;
 
 export default function MobileConsFilter() {
   const [activeMenu, setActiveMenu] = useState<MenuType>(null);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
-  const [consoMax, setConsoMax] = useState<EquipementsType[]>([]);
-  const [critair, setCritair] = useState<EquipementsType[]>([]);
+  const consoMax = useApi<EquipementsType>("/api/consoMax");
+  const critair = useApi<EquipementsType>("/api/critair");
 
   const handleMenuClick = (menuType: MenuType) => {
     setActiveMenu(menuType);
     setIsOverlayVisible(true);
   };
 
-  useEffect(() => {
-    const fetchConsoMax = async () => {
-      try {
-        const response = await fetch("/api/consoMax");
-        const data = await response.json();
-        setConsoMax(data);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des équipements:", error);
-      }
-    };
-
-    fetchConsoMax();
-  }, []);
-
-  useEffect(() => {
-    const fetchCritair = async () => {
-      try {
-        const response = await fetch("/api/critair");
-        const data = await response.json();
-        setCritair(data);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des équipements:", error);
-      }
-    };
-
-    fetchCritair();
-  }, []);
   return (
     <main className="flex flex-col gap-4">
       <div className="flex flex-col font-semibold text-lg rounded-lg border overflow-hidden">

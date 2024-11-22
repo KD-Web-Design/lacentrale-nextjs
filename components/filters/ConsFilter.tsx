@@ -1,44 +1,18 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { ChevronRight } from "lucide-react";
 import { Input } from "../ui/input";
-import { EquipementsType } from "../mobile/filters/MobileEquipmentFilter";
 import { Label } from "../ui/label";
 import { formatNumber } from "@/lib/formatNumber";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { EquipementsType } from "@/data/navigationData";
+import { useApi } from "@/hooks/useApi";
 
 export default function ConsFilter() {
-  const [consoMax, setConsoMax] = useState<EquipementsType[]>([]);
-  const [critair, setCritair] = useState<EquipementsType[]>([]);
-  useEffect(() => {
-    const fetchConsoMax = async () => {
-      try {
-        const response = await fetch("/api/consoMax");
-        const data = await response.json();
-        setConsoMax(data);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des équipements:", error);
-      }
-    };
-
-    fetchConsoMax();
-  }, []);
-
-  useEffect(() => {
-    const fetchCritair = async () => {
-      try {
-        const response = await fetch("/api/critair");
-        const data = await response.json();
-        setCritair(data);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des équipements:", error);
-      }
-    };
-
-    fetchCritair();
-  }, []);
+  const consoMax = useApi<EquipementsType>("/api/consoMax");
+  const critair = useApi<EquipementsType>("/api/critair");
   return (
     <div className="rounded-lg border overflow-hidden">
       <div>
