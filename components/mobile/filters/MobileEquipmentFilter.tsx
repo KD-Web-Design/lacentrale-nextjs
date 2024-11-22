@@ -115,7 +115,7 @@ export default function MobileEquipmentFilter() {
           </div>
         )}
 
-        <ScrollArea className="border-b-2 focus:bg-gray-100 flex-grow px-2">
+        <ScrollArea className="border-b-2 focus:bg-muted flex-grow px-2">
           {activeMenu === "equipements"
             ? filteredEquipements.map((item) => (
                 <div key={item.id} className="mb-1">

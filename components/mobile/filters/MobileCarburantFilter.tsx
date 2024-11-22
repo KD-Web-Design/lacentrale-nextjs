@@ -35,7 +35,7 @@ export default function MobileCarburantFilter() {
             >
               {type}
             </span>
-            <span className="absolute inset-0 bg-gray-100 scale-x-0 group-hover:scale-x-100 transform transition-transform duration-300 origin-left" />
+            <span className="absolute inset-0 bg-muted scale-x-0 group-hover:scale-x-100 transform transition-transform duration-300 origin-left" />
           </a>
         ))}
       </div>

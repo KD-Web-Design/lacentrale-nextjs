@@ -59,7 +59,7 @@ export default function MobileVehicleLoc() {
         title="Par régions"
         onClose={() => setIsOverlayVisible(false)}
       >
-        <ScrollArea className="border-b-2 focus:bg-gray-100 flex-grow px-2">
+        <ScrollArea className="border-b-2 focus:bg-muted flex-grow px-2">
           {filteredRegions.map((region) => (
             <div key={region.id} className="mb-1">
               <Label

@@ -28,7 +28,7 @@ export default function MobileFilters({ onClose }: { onClose: () => void }) {
         <XIcon
           size={42}
           strokeWidth={1}
-          className="cursor-pointer absolute right-0"
+          className="cursor-pointer absolute right-0 hover:scale-110"
           onClick={onClose}
         />
       </div>
@@ -57,7 +57,7 @@ export default function MobileFilters({ onClose }: { onClose: () => void }) {
         >
           Rechercher (322 255)
         </Button>
-        <span className="absolute inset-0 bg-gray-100 scale-x-0 group-hover:scale-x-100 transform transition-transform duration-300 origin-left"></span>
+        <span className="absolute inset-0 bg-muted scale-x-0 group-hover:scale-x-100 transform transition-transform duration-300 origin-left"></span>
       </footer>
     </div>
   );

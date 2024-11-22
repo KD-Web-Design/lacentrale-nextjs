@@ -26,7 +26,7 @@ export default function MobileSort({ onClose }: { onClose: () => void }) {
         {sortOptions.map(({ id, option }) => (
           <Label
             key={id}
-            className="flex justify-between hover:bg-gray-100 cursor-pointer p-2 rounded"
+            className="flex justify-between hover:bg-muted cursor-pointer p-2 rounded"
             htmlFor={`option-${id}`}
           >
             <span>{option}</span>

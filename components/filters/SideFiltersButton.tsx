@@ -65,7 +65,7 @@ export default function SideFiltersButton() {
     return items.map((item: BaseEntity) => (
       <div
         key={item.id}
-        className="flex items-center space-x-2 hover:bg-gray-100 px-4 py-1 rounded-sm"
+        className="flex items-center space-x-2 hover:bg-muted px-4 py-1 rounded-sm"
       >
         <Checkbox id={`${type}-${item.id}`} />
         <Label htmlFor={`${type}-${item.id}`} className="cursor-pointer">
@@ -85,7 +85,7 @@ export default function SideFiltersButton() {
           key={item.id}
           onOpenChange={(isOpen) => handlePopoverChange(isOpen, item.name)}
         >
-          <PopoverTrigger className="flex justify-between bg-slate-100 rounded-lg py-2 px-4 border hover:border-black">
+          <PopoverTrigger className="flex justify-between bg-muted rounded-lg py-2 px-4 border hover:border-black">
             <span className="font-semibold text-md">{item.name}</span>
             <ChevronRight size={24} />
           </PopoverTrigger>
@@ -110,7 +110,7 @@ export default function SideFiltersButton() {
               />
             </div>
             <ScrollArea className="">
-              <div className="focus:bg-gray-100 grid grid-cols-2 gap-2">
+              <div className="focus:bg-muted grid grid-cols-2 gap-2">
                 {activePopover === "Type de véhicule" &&
                   renderPopoverItems(filteredCategories, "category")}
                 {activePopover === "Marque" &&

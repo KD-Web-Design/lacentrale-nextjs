@@ -18,7 +18,7 @@ export default function DoorsCount({ max }: DoorsCountProps) {
         className="relative overflow-hidden rounded-lg flex items-center justify-center h-fit group w-12 border"
       >
         <span className="relative z-10 font-medium">-</span>
-        <span className="absolute inset-0 bg-gray-100 scale-x-0 group-hover:scale-x-100 transform transition-transform duration-300 origin-left" />
+        <span className="absolute inset-0 bg-muted scale-x-0 group-hover:scale-x-100 transform transition-transform duration-300 origin-left" />
       </Button>
 
       <span className="text-lg font-medium">{count}</span>
@@ -30,7 +30,7 @@ export default function DoorsCount({ max }: DoorsCountProps) {
         className="relative overflow-hidden rounded-lg flex items-center justify-center h-fit group w-12 border"
       >
         <span className="relative z-10 font-medium">+</span>
-        <span className="absolute inset-0 bg-gray-100 scale-x-0 group-hover:scale-x-100 transform transition-transform duration-300 origin-left" />
+        <span className="absolute inset-0 bg-muted scale-x-0 group-hover:scale-x-100 transform transition-transform duration-300 origin-left" />
       </Button>
     </div>
   );

@@ -54,7 +54,7 @@ export default function MobileConsFilter() {
   return (
     <main className="flex flex-col gap-4">
       <div className="flex flex-col font-semibold text-lg rounded-lg border overflow-hidden">
-        <header className="bg-gray-100 w-full h-9 px-4 flex items-center">
+        <header className="bg-muted w-full h-9 px-4 flex items-center">
           <span className="font-semibold">Consommation</span>
         </header>
         <div className="w-full flex flex-col gap-3 space-y-2 p-4 border">
@@ -111,7 +111,7 @@ export default function MobileConsFilter() {
             />
           </header>
 
-          <ScrollArea className="border-b-2 focus:bg-gray-100 flex-grow px-2">
+          <ScrollArea className="border-b-2 focus:bg-muted flex-grow px-2">
             <RadioGroup
               defaultValue={`option-${consoMax[0]?.id}`}
               className="mt-3 space-y-2"

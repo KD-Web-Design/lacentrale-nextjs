@@ -38,7 +38,7 @@ export default function MainSection() {
                     <Label
                       key={item.id}
                       htmlFor={`option-${item.id}`}
-                      className="inline-flex items-center gap-2 cursor-pointer hover:bg-gray-100 px-4 py-2"
+                      className="inline-flex items-center gap-2 cursor-pointer hover:bg-muted px-4 py-2"
                     >
                       <RadioGroupItem
                         id={`option-${item.id}`}
@@ -51,9 +51,9 @@ export default function MainSection() {
               </PopoverContent>
             </Popover>
           </div>
-          <div className="rounded-lg w-full bg-gray-100 p-3 pb-6 flex flex-col gap-3">
+          <div className="rounded-lg w-full bg-muted p-3 pb-6 flex flex-col gap-3">
             {Array.from({ length: 26 }, (_, index) => (
-              <VehicleCard key={index} />
+              <VehicleCard key={index} index={index} />
             ))}
             <SaveSearchBtn />
             <Pagination />

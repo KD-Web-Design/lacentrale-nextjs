@@ -82,7 +82,7 @@ export default function MobileDoorsFilter() {
         }
         onClose={handleClose}
       >
-        <ScrollArea className="border-b-2 focus:bg-gray-100 flex-grow px-2">
+        <ScrollArea className="border-b-2 focus:bg-muted flex-grow px-2">
           {activeMenu === "nbPlaces"
             ? nbPlaces.map((item) => (
                 <div key={item.id} className="mb-1">

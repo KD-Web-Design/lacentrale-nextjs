@@ -64,7 +64,7 @@ export default function MobileSideFiltersButton() {
       <div key={item.id} className="">
         <Label
           htmlFor={`${type}-${item.id}`}
-          className="cursor-pointer flex items-center hover:bg-gray-100 p-2 rounded-sm relative"
+          className="cursor-pointer flex items-center hover:bg-muted p-2 rounded-sm relative"
         >
           {item.nom}{" "}
           <span className="text-gray-400 text-xs ml-2">
@@ -82,7 +82,7 @@ export default function MobileSideFiltersButton() {
         <section key={item.id}>
           <div
             id="trigger"
-            className="flex justify-between items-center text-black font-semibold text-lg bg-gray-100 rounded-lg py-1 px-4 border hover:border-black cursor-pointer"
+            className="flex justify-between items-center text-black font-semibold text-lg bg-muted rounded-lg py-1 px-4 border hover:border-black cursor-pointer"
             onClick={() => handlePopoverChange(true, item.name)}
           >
             <span className="font-semibold text-md">{item.name}</span>
@@ -117,7 +117,7 @@ export default function MobileSideFiltersButton() {
                   className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
                 />
               </div>
-              <ScrollArea className="border-b-2 focus:bg-gray-100 flex-grow px-4">
+              <ScrollArea className="border-b-2 focus:bg-muted flex-grow px-4">
                 {activePopover === "Type de véhicule" &&
                   renderPopoverItems(filteredCategories, "category")}
                 {activePopover === "Marque" &&

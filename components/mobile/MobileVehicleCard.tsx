@@ -14,11 +14,23 @@ import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import Image from "next/image";
 
-export default function MobileVehicleCard() {
+export interface MobileVehicleCardProps {
+  index: number;
+}
+
+export default function MobileVehicleCard({ index }: MobileVehicleCardProps) {
   return (
     <Card className="overflow-hidden cursor-pointer border border-black">
       <CardContent className="grid grid-cols-3 gap-1 p-0  aspect-[16/9] relative max-h-[208px] w-full">
         <div className="relative col-span-2 h-full max-h-[220px]">
+          {index === 0 && (
+            <Badge
+              id="currently"
+              className="absolute top-2 left-2 rounded z-10"
+            >
+              En ce moment
+            </Badge>
+          )}
           <Image
             src="/images/bmw-m3-competition-touring-hd-02.jpg"
             alt="bmw-m3-side"
@@ -85,7 +97,7 @@ export default function MobileVehicleCard() {
         <div className="flex w-full items-center justify-between pt-1 ">
           <div className="flex flex-col gap-1 whitespace-nowrap">
             <span className="text-xs">NEUBAUER BMW BOULOGNE</span>
-            <span className="inline-flex items-center p-1 text-xs w-fit bg-gray-100 rounded">
+            <span className="inline-flex items-center p-1 text-xs w-fit bg-muted rounded">
               <MapPin size={16} className="mr-1" />
               BOULOGNE-BILLANCOURT
             </span>
