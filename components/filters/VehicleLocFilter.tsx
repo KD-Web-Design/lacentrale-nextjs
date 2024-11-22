@@ -55,7 +55,7 @@ export default function VehicleLocFilter() {
               side="right"
               align="start"
               sideOffset={32}
-              className="w-[400px] flex flex-col space-y-2 p-3 border shadow-lg border-black rounded-lg bg-white"
+              className="w-[400px] flex flex-col space-y-2 p-3 border shadow-lg border-black rounded-lg bg-white z-10"
             >
               <h1 className="font-semibold">Par régions</h1>
 
