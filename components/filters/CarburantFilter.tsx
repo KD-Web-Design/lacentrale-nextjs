@@ -1,14 +1,19 @@
 "use client";
 
-import React from "react";
+import React, { useCallback } from "react";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
 import { useApi } from "@/hooks/useApi";
 import { useApiData } from "@/data/navigationData";
 
 export default function CarburantFilter() {
-  const carburants = useApi<string, useApiData>("/api/carburant", (data) =>
-    data.map((c) => c.type)
+  const transformCarburants = useCallback(
+    (data: useApiData[]) => data.map((c) => c.type),
+    []
+  );
+  const carburants = useApi<string, useApiData>(
+    "/api/carburant",
+    transformCarburants
   );
   return (
     <div className="rounded-lg border overflow-hidden">

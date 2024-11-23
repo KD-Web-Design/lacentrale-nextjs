@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { MobileFilterLayout } from "../layout/MobileFilterLayout";
 import { useApi } from "@/hooks/useApi";
 import { useApiData } from "@/data/navigationData";
 
 export default function MobileCarburantFilter() {
-  const carburants = useApi<string, useApiData>("/api/carburant", (data) =>
-    data.map((c) => c.type)
+  const transformCarburants = useCallback(
+    (data: useApiData[]) => data.map((c) => c.type),
+    []
+  );
+  const carburants = useApi<string, useApiData>(
+    "/api/carburant",
+    transformCarburants
   );
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   BaseEntity,
   SideFiltersButtonPopoverName,
@@ -10,14 +10,31 @@ import { Input } from "../../ui/input";
 import { ScrollArea } from "../../ui/scroll-area";
 import MobileValidateBtn from "./MobileValidateBtn";
 import { useApi } from "@/hooks/useApi";
+import { formatNumber } from "@/lib/formatNumber";
 
 export default function MobileSideFiltersButton() {
-  const categories = useApi<BaseEntity>("/api/categories");
-  const marques = useApi<BaseEntity>("/api/marques");
-  const modeles = useApi<BaseEntity>("/api/modeles");
+  const [selectedMarque, setSelectedMarque] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [activePopover, setActivePopover] = useState<string | null>(null);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+
+  const params = useMemo(
+    () =>
+      selectedMarque.length > 0
+        ? { marque_id: selectedMarque.join(",") }
+        : undefined,
+    [selectedMarque]
+  );
+
+  const categories = useApi<BaseEntity>("/api/categories");
+  const marques = useApi<BaseEntity>("/api/marques");
+  const modeles = useApi<BaseEntity>("/api/modeles", undefined, params);
+
+  const handleMarqueChange = (marqueId: number, checked: boolean) => {
+    setSelectedMarque((prev) =>
+      checked ? [...prev, marqueId] : prev.filter((id) => id !== marqueId)
+    );
+  };
 
   const filterItems = (items: BaseEntity[]) =>
     items.filter((item) =>
@@ -42,20 +59,69 @@ export default function MobileSideFiltersButton() {
 
   // Fonction générique pour afficher les items des Popovers
   const renderPopoverItems = (items: BaseEntity[], type: string) => {
-    return items.map((item: BaseEntity) => (
-      <div key={item.id} className="">
-        <Label
-          htmlFor={`${type}-${item.id}`}
-          className="cursor-pointer flex items-center hover:bg-muted p-2 rounded-sm relative"
-        >
-          {item.nom}{" "}
-          <span className="text-gray-400 text-xs ml-2">
-            ({item.nombre_de_vehicules})
-          </span>
-          <Checkbox id={`${type}-${item.id}`} className="absolute right-2" />
-        </Label>
-      </div>
-    ));
+    if (type === "category") {
+      return items.map((item: BaseEntity) => (
+        <div key={item.id} className="">
+          <Label
+            htmlFor={`${type}-${item.id}`}
+            className="cursor-pointer flex items-center hover:bg-muted p-2 rounded-sm relative"
+          >
+            {item.nom}{" "}
+            <span className="text-gray-400 text-xs ml-2">
+              ({formatNumber(item.nombre_de_vehicules)})
+            </span>
+            <Checkbox id={`${type}-${item.id}`} className="absolute right-2" />
+          </Label>
+        </div>
+      ));
+    }
+
+    if (type === "marque") {
+      return items.map((item: BaseEntity) => (
+        <div key={item.id} className="">
+          <Label
+            htmlFor={`${type}-${item.id}`}
+            className="cursor-pointer flex items-center hover:bg-muted p-2 rounded-sm relative"
+          >
+            {item.nom}{" "}
+            <span className="text-gray-400 text-xs ml-2">
+              ({formatNumber(item.nombre_de_vehicules)})
+            </span>
+            <Checkbox
+              id={`${type}-${item.id}`}
+              className="absolute right-2"
+              onCheckedChange={(checked) =>
+                handleMarqueChange(item.id, checked as boolean)
+              }
+              checked={selectedMarque.includes(item.id)}
+            />
+          </Label>
+        </div>
+      ));
+    }
+
+    if (type === "modele") {
+      const filteredModeles = items.filter(
+        (item) =>
+          selectedMarque.length === 0 ||
+          (item.marque_id && selectedMarque.includes(item.marque_id))
+      );
+
+      return filteredModeles.map((item: BaseEntity) => (
+        <div key={item.id} className="">
+          <Label
+            htmlFor={`${type}-${item.id}`}
+            className="cursor-pointer flex items-center hover:bg-muted p-2 rounded-sm relative"
+          >
+            {item.nom}{" "}
+            <span className="text-gray-400 text-xs ml-2">
+              ({formatNumber(item.nombre_de_vehicules)})
+            </span>
+            <Checkbox id={`${type}-${item.id}`} className="absolute right-2" />
+          </Label>
+        </div>
+      ));
+    }
   };
 
   return (

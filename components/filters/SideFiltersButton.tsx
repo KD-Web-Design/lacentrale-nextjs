@@ -5,7 +5,7 @@ import { Input } from "../ui/input";
 import { Checkbox } from "../ui/checkbox";
 import { Popover, PopoverTrigger, PopoverContent } from "../ui/popover";
 import { Label } from "../ui/label";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   BaseEntity,
   SideFiltersButtonPopoverName,
@@ -16,12 +16,20 @@ import { formatNumber } from "@/lib/formatNumber";
 
 export default function SideFiltersButton() {
   // Gestion d'états
-  const categories = useApi<BaseEntity>("/api/categories");
-  const marques = useApi<BaseEntity>("/api/marques");
-  const modeles = useApi<BaseEntity>("/api/modeles");
+  const [selectedMarque, setSelectedMarque] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [activePopover, setActivePopover] = useState<string | null>(null);
 
+  const params = useMemo(
+    () =>
+      selectedMarque.length > 0
+        ? { marque_id: selectedMarque.join(",") }
+        : undefined,
+    [selectedMarque]
+  );
+  const categories = useApi<BaseEntity>("/api/categories");
+  console.log("Categories:", categories);
+  const marques = useApi<BaseEntity>("/api/marques");
+  const modeles = useApi<BaseEntity>("/api/modeles", undefined, params);
   // Fonctions utilitaires pour gérer la recherche dans l'Input
   const filterItems = (items: BaseEntity[]) =>
     items.filter((item) =>
@@ -33,31 +41,84 @@ export default function SideFiltersButton() {
   const filteredModeles = filterItems(modeles);
 
   // Fonction pour gérer les Popovers
-  const handlePopoverChange = (isOpen: boolean, popoverName: string) => {
-    if (isOpen) {
-      setActivePopover(popoverName);
-    } else {
+  const handlePopoverChange = (isOpen: boolean) => {
+    if (!isOpen) {
       setSearchTerm("");
-      setActivePopover(null);
     }
+  };
+
+  const handleMarqueChange = (marqueId: number, checked: boolean) => {
+    setSelectedMarque((prev) =>
+      checked ? [...prev, marqueId] : prev.filter((id) => id !== marqueId)
+    );
   };
 
   // Fonction générique pour afficher les items des Popovers
   const renderPopoverItems = (items: BaseEntity[], type: string) => {
-    return items.map((item: BaseEntity) => (
-      <div
-        key={item.id}
-        className="flex items-center space-x-2 hover:bg-muted px-4 py-1 rounded-sm"
-      >
-        <Checkbox id={`${type}-${item.id}`} />
-        <Label htmlFor={`${type}-${item.id}`} className="cursor-pointer">
-          {item.nom}{" "}
-          <span className="text-gray-400 text-xs ml-1">
-            ({formatNumber(item.nombre_de_vehicules)})
-          </span>
-        </Label>
-      </div>
-    ));
+    if (type === "categories") {
+      return items.map((item: BaseEntity) => (
+        <div
+          key={item.id}
+          className="flex items-center space-x-2 hover:bg-muted px-4 py-1 rounded-sm"
+        >
+          <Checkbox id={`${type}-${item.id}`} />
+          <Label htmlFor={`${type}-${item.id}`} className="cursor-pointer">
+            {item.nom}{" "}
+            <span className="text-gray-400 text-xs ml-1">
+              ({formatNumber(item.nombre_de_vehicules)})
+            </span>
+          </Label>
+        </div>
+      ));
+    }
+    if (type === "marques") {
+      return items.map((item: BaseEntity) => (
+        <div
+          key={item.id}
+          className="flex items-center space-x-2 hover:bg-muted px-4 py-1 rounded-sm"
+        >
+          <Checkbox
+            id={`${type}-${item.id}`}
+            onCheckedChange={(checked) =>
+              handleMarqueChange(item.id, checked as boolean)
+            }
+            checked={selectedMarque.includes(item.id)}
+          />
+          <Label htmlFor={`${type}-${item.id}`} className="cursor-pointer">
+            {item.nom}{" "}
+            <span className="text-gray-400 text-xs ml-1">
+              ({formatNumber(item.nombre_de_vehicules)})
+            </span>
+          </Label>
+        </div>
+      ));
+    }
+
+    // Pour les modèles, filtrer selon les marques sélectionnées
+    if (type === "modeles") {
+      const filteredModeles = items.filter(
+        (item) =>
+          selectedMarque.length === 0 ||
+          (item.marque_id && selectedMarque.includes(item.marque_id))
+      );
+
+      return filteredModeles.map((item: BaseEntity) => (
+        <div
+          key={item.id}
+          className="flex items-center space-x-2 hover:bg-muted px-4 py-1 rounded-sm"
+        >
+          <Checkbox id={`${type}-${item.id}`} />
+          <Label htmlFor={`${type}-${item.id}`} className="cursor-pointer">
+            {item.nom}{" "}
+            <span className="text-gray-400 text-xs ml-1">
+              ({formatNumber(item.nombre_de_vehicules)})
+            </span>
+          </Label>
+        </div>
+      ));
+    }
+
+    return null;
   };
 
   return (
@@ -65,7 +126,7 @@ export default function SideFiltersButton() {
       {SideFiltersButtonPopoverName.map((item) => (
         <Popover
           key={item.id}
-          onOpenChange={(isOpen) => handlePopoverChange(isOpen, item.name)}
+          onOpenChange={(isOpen) => handlePopoverChange(isOpen)}
         >
           <PopoverTrigger className="flex justify-between bg-muted rounded-lg py-2 px-4 border hover:border-black">
             <span className="font-semibold text-md">{item.name}</span>
@@ -93,12 +154,12 @@ export default function SideFiltersButton() {
             </div>
             <ScrollArea className="">
               <div className="focus:bg-muted grid grid-cols-2 gap-2">
-                {activePopover === "Type de véhicule" &&
-                  renderPopoverItems(filteredCategories, "category")}
-                {activePopover === "Marque" &&
-                  renderPopoverItems(filteredMarques, "marque")}
-                {activePopover === "Modèle" &&
-                  renderPopoverItems(filteredModeles, "modele")}
+                {item.name === "Type de véhicule" &&
+                  renderPopoverItems(filteredCategories, "categories")}
+                {item.name === "Marque" &&
+                  renderPopoverItems(filteredMarques, "marques")}
+                {item.name === "Modèle" &&
+                  renderPopoverItems(filteredModeles, "modeles")}
               </div>
             </ScrollArea>
           </PopoverContent>
